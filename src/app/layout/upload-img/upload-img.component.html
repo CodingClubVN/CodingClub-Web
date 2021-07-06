@@ -1,0 +1,28 @@
+<div class="upload w-75 m-auto text-center">
+   <section class="upload__detail my-4">
+      <h3>Upload ảnh vô đây nhé!</h3>
+      <p class="text-danger fst-italic">Lưu ý: File dưới 10mb, để tên dễ nhớ.</p>
+   </section>
+   <div class="container-fluid p-0 my-4">
+      <div class="input-group">
+         <input type="file" (change)="onFileSelected($event)" class="form-control"/>
+         <span class="input-group-text">Size: {{ imgSize | number }} MB</span>
+      </div>
+      <button class="btn btn-primary my-3" (click)="onUpload()" type="button">
+         <span class="spinner-border spinner-border-sm" *ngIf="isLoading" role="status" aria-hidden="true"></span>Submit
+      </button>
+      <p [class]="this.fileCheckerStatus ? 'text-success' : 'text-danger'">{{ fileCheckerMessage }}</p>
+   </div>
+   <div class="upload__preview" *ngIf="!this.status">
+      <h2>Xem trước</h2>
+      <img [src]="this.imgUrl" class="w-50">
+   </div>
+   <div class="upload__result">
+      <h2>Phản hồi từ Server</h2>
+      <span>Trạng thái: </span><span [class]="this.status ? 'text-success' : 'text-danger'">{{ status ? 'Thành công' : 'Thất bại' }}</span><br>
+      <span>Tin nhắn từ server: </span><span>{{ message }}</span><br>
+      <span>Img Src: </span>
+      <a [href]="imgSrc" target="_blank">Link</a>
+      <button class="btn btn-info mx-2 btn-sm" (click)="copySrc()">Copy</button>
+   </div>
+</div>
