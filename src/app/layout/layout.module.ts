@@ -6,12 +6,16 @@ import { HomeComponent } from './home/home.component';
 import { UploadImgComponent } from './upload-img/upload-img.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ClipboardModule } from 'ngx-clipboard';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    UploadImgComponent
+    UploadImgComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,

@@ -54,7 +54,7 @@ export class UploadImgComponent implements OnInit {
         this.isLoading = !this.isLoading;
         console.log(res);
         this.status = res.ok;
-        this.message = res.statusText
+        this.message = res.statusText;
         this.imgSrc = res.body.url;
       });
     }
