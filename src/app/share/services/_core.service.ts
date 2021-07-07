@@ -15,7 +15,6 @@ export class ApiService {
   ) {
   }
 
-
   public setHeaders(headers?: any): HttpHeaders {
     // const token = 'Bearer ' + this.storageService.getToken();
     const token = '';
