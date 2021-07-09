@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ClipboardService } from 'ngx-clipboard';
-import { ApiService } from 'src/app/share/services/_core.service';
+import { ApiService } from 'src/app/share/services/core/_core.service';
 
 @Component({
   selector: 'app-upload-img',

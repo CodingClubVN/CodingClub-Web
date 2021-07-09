@@ -4,6 +4,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import * as _ from 'lodash';
 // import {StorageService} from '../storage/storage.service';
+import {TokenStorageService} from '../auth/token-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,13 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient,
               // private storageService: StorageService
+              private tokenStorageService: TokenStorageService
   ) {
   }
 
   public setHeaders(headers?: any): HttpHeaders {
-    // const token = 'Bearer ' + this.storageService.getToken();
-    const token = '';
+    const token = 'Bearer ' + this.tokenStorageService.getToken();
+    // const token = '';
     let httpHeaders;
 
     if (token) {
