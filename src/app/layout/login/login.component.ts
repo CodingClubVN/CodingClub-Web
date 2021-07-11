@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormControl, Validators} from '@angular/forms';
 import { AuthService } from '../../share/services/auth/auth.service';
 import { TokenStorageService } from '../../share/services/auth/token-storage.service';
-import { Router } from '@angular/router';
-import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +13,7 @@ export class LoginComponent implements OnInit {
 
   constructor( private formBuilder: FormBuilder,
                private authService: AuthService,
-               private tokenStorageService: TokenStorageService,
-               private router: Router,
-               private location: Location) { }
+               private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
     this.infoUser = this.formBuilder.group({
@@ -26,14 +22,18 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line:typedef
+  get f() {
+    return this.infoUser.controls;
+  }
+
   onSubmit(): void{
     console.log(this.infoUser.getRawValue());
     this.authService.login(this.infoUser.getRawValue()).subscribe(res => {
-        // console.log(res.body.access_token);
         console.log(res);
+        this.tokenStorageService.saveUsername(this.f.username.value);
         this.tokenStorageService.saveToken(res.body.token);
         this.reload();
-        // this.router.navigate(['/home']);
       },
       err => {
         console.log(err);
@@ -41,7 +41,6 @@ export class LoginComponent implements OnInit {
     );
   }
   reload(): void{
-    this.location.replaceState('/home');
     window.location.reload();
   }
 }

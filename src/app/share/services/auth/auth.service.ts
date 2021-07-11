@@ -24,6 +24,10 @@ export class AuthService {
     const url = `${apiUrl}/api/auth/register`;
     return this.apiService.post(url, infoUser);
   }
+  changePassword(info: any): Observable<any> {
+    const url = `${apiUrl}/api/auth/change-password`;
+    return this.apiService.post(url, info);
+  }
   isLogiedIn(): void{
     return this.getJwtToken();
   }

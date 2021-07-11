@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'angular2-cookie/core';
 
 const TOKEN_KEY = 'auth-token';
+const USERNAME_KEY = 'username';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,11 @@ export class TokenStorageService {
   }
   signOut(): void {
     window.sessionStorage.clear();
+  }
+  public saveUsername(username: string): void {
+    window.sessionStorage.setItem(USERNAME_KEY, username);
+  }
+  public getUsername(): void{
+    window.sessionStorage.getItem(USERNAME_KEY);
   }
 }

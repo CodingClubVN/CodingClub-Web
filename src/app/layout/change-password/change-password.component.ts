@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators, FormBuilder} from '@angular/forms';
 import { AuthService } from '../../share/services/auth/auth.service';
-
+import { TokenStorageService } from '../../share/services/auth/token-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-password',
@@ -12,7 +13,8 @@ export class ChangePasswordComponent implements OnInit {
   infoUser: any;
 
   constructor( private formBuilder: FormBuilder,
-               private authService: AuthService) { }
+               private authService: AuthService,
+               private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
     this.infoUser = this.formBuilder.group({
@@ -27,5 +29,21 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   onSubmit(): void{
+    if (this.f.newpassword.value === this.f.confirmnewpassword.value){
+      const infochange = {
+        token: this.tokenStorageService.getToken(),
+        newPassword: this.f.newpassword.value,
+        oldPassword: this.f.oldpassword.value,
+        username: this.tokenStorageService.getUsername()
+      };
+      this.authService.changePassword(infochange).subscribe(res => {
+          console.log(res);
+        },
+        error => {
+          console.log(error);
+        });
+    }else{
+      console.log('ERRO: Fail !');
+    }
   }
 }
