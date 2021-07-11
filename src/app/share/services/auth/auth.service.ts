@@ -13,7 +13,8 @@ const apiUrl = `${environment.apiUrl}`;
 })
 export class AuthService {
 
-  constructor( private apiService: ApiService) { }
+  constructor( private apiService: ApiService,
+               private tokenStorageService: TokenStorageService) { }
 
   login(infoUser: any): Observable<any> {
     const url = `${apiUrl}/api/auth/login`;
@@ -23,9 +24,11 @@ export class AuthService {
     const url = `${apiUrl}/api/auth/register`;
     return this.apiService.post(url, infoUser);
   }
-  // test json-server-authentication => success
-  // getProducts(): Observable<any> {
-  //   const url = `${apiUrl}/products`;
-  //   return this.apiService.get(url);
-  // }
+  isLogiedIn(): void{
+    return this.getJwtToken();
+  }
+
+  getJwtToken(): void{
+    return this.tokenStorageService.getToken();
+  }
 }
