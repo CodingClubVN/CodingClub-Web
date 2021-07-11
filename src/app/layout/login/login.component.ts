@@ -31,8 +31,9 @@ export class LoginComponent implements OnInit {
     console.log(this.infoUser.getRawValue());
     this.authService.login(this.infoUser.getRawValue()).subscribe(res => {
         // console.log(res.body.access_token);
+        console.log(res);
         Emitters.authEmitter.emit(true);
-        this.tokenStorageService.saveToken(res.body.access_token);
+        this.tokenStorageService.saveToken(res.body.token);
         this.router.navigate(['/home']);
       },
       err => {

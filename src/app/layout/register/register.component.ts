@@ -20,6 +20,9 @@ export class RegisterComponent implements OnInit {
     this.infoUser = this.formBuilder.group({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
+      fullname: new FormControl('', Validators.required),
+      dob: new FormControl('', Validators.required),
+      phone: new FormControl('', Validators.required),
       confirmpassword: new FormControl('', Validators.required)
     });
   }
@@ -41,7 +44,10 @@ export class RegisterComponent implements OnInit {
     if (this.checkPassword()){
       const user = {
         username: this.f.username.value,
-        password: this.f.password.value
+        password: this.f.password.value,
+        fullname: this.f.password.value,
+        dob: this.f.password.value,
+        phone: this.f.password.value,
       };
       console.log(user);
       this.authService.register(user).subscribe(
