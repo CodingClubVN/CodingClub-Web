@@ -11,7 +11,6 @@ import { RegisterComponent } from './register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 
-
 @NgModule({
   declarations: [
     HomeComponent,

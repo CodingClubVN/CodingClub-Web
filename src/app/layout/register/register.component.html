@@ -10,9 +10,17 @@
         name="username"
         formControlName="username"
         required
-        placeholder="Username"
+        placeholder="Tên đăng nhập"
         id="username"
       >
+      <div *ngIf="username?.invalid && (username?.touched || submitted)" class="text-danger mt-2">
+        <div *ngIf="username?.errors?.required">
+          <i class="fa fa-exclamation-circle" aria-hidden="true"> Tên đăng nhập không được để trống </i>
+        </div>
+        <div *ngIf="username?.errors?.pattern">
+          <i class="fa fa-exclamation-circle" aria-hidden="true">Tên đăng nhập sai định dạng </i>
+        </div>
+      </div>
     </div>
     <div class="reg-form form-group my-3">
       <input
@@ -24,6 +32,14 @@
         placeholder="Tên"
         id="firstname"
       >
+      <div *ngIf="firstname?.invalid && (firstname?.touched || submitted)" class="text-danger mt-2">
+        <div *ngIf="firstname?.errors?.required">
+          <i class="fa fa-exclamation-circle" aria-hidden="true">Tên không được để trống</i>
+        </div>
+        <div *ngIf="firstname?.errors?.pattern">
+          <i class="fa fa-exclamation-circle" aria-hidden="true">Tên sai dinh dang</i>
+        </div>
+      </div>
     </div>
     <div class="reg-form form-group my-3">
       <input
@@ -35,6 +51,14 @@
         placeholder="Họ"
         id="lastname"
       >
+      <div *ngIf="lastname?.invalid && (lastname?.touched || submitted)" class="text-danger mt-2">
+        <div *ngIf="lastname?.errors?.required">
+          <i class="fa fa-exclamation-circle" aria-hidden="true"> Họ không được để trống</i>
+        </div>
+        <div *ngIf="lastname?.errors?.pattern">
+          <i class="fa fa-exclamation-circle" aria-hidden="true">Họ sai dinh dạng</i>
+        </div>
+      </div>
     </div>
     <div class="reg-form form-group my-3">
       <input
@@ -46,6 +70,14 @@
         placeholder="Email"
         id="email"
       >
+      <div *ngIf="email?.invalid && (email?.touched || submitted)" class="text-danger mt-2">
+        <div *ngIf="email?.errors?.required">
+          <i class="fa fa-exclamation-circle" aria-hidden="true">Email không được để trống</i>
+        </div>
+        <div *ngIf="email?.errors?.email">
+          <i class="fa fa-exclamation-circle" aria-hidden="true">Email sai dinh dạng</i>
+        </div>
+      </div>
     </div>
     <div class="reg-form form-group my-3">
       <input
@@ -57,6 +89,14 @@
         placeholder="Số Điện Thoại"
         id="phone"
       >
+      <div *ngIf="phone?.invalid && (phone?.touched || submitted)" class="text-danger mt-2">
+        <div *ngIf="phone?.errors?.required">
+          <i class="fa fa-exclamation-circle" aria-hidden="true">Số điện thoại không được để trống</i>
+        </div>
+        <div *ngIf="phone?.errors?.pattern">
+          <i class="fa fa-exclamation-circle" aria-hidden="true">Số điện thoại sai dinh dạng</i>
+        </div>
+      </div>
     </div>
     <div class="reg-form form-group my-3">
       <input
@@ -65,9 +105,17 @@
         name="password"
         formControlName="password"
         required
-        placeholder="Password"
+        placeholder="Mật khẩu"
         id="password"
       >
+      <div *ngIf="password?.invalid && (password?.touched || submitted)" class="text-danger mt-2">
+        <div *ngIf="password?.errors?.required">
+          <i class="fa fa-exclamation-circle" aria-hidden="true">Mật khẩu không được để trống</i>
+        </div>
+        <div *ngIf="password?.errors?.minlength">
+          <i class="fa fa-exclamation-circle" aria-hidden="true">Mật khẩu phải lơn hơn 9 ký tự</i>
+        </div>
+      </div>
     </div>
     <div class="reg-form form-group my-3">
       <input
@@ -76,9 +124,14 @@
         name="confirmpassword"
         formControlName="confirmpassword"
         required
-        placeholder="Confirmpassword"
+        placeholder="Xác thực mật khẩu"
         id="confirmpassword"
       >
+      <div *ngIf="confirmpassword?.invalid && (confirmpassword?.touched || submitted)" class="text-danger mt-2">
+        <div *ngIf="confirmpassword?.errors?.required">
+          <i class="fa fa-exclamation-circle" aria-hidden="true">Xác thực mật khẩu không được để trống</i>
+        </div>
+      </div>
     </div>
     <div class="text-center pb-5">
       <button type="submit" class="btn btn-danger">ĐĂNG KÝ</button>

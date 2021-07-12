@@ -10,6 +10,7 @@ import { TokenStorageService } from '../../share/services/auth/token-storage.ser
 })
 export class LoginComponent implements OnInit {
   infoUser: any;
+  submitted = false;
 
   constructor( private formBuilder: FormBuilder,
                private authService: AuthService,
@@ -17,8 +18,17 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.infoUser = this.formBuilder.group({
-      username: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required)
+      username: new FormControl('',
+        [
+          Validators.required,
+          Validators.pattern('^[A-Z]*[a-z]*\\d*$')
+        ]
+      ),
+      password: new FormControl('',
+        [
+          Validators.required,
+          Validators.minLength(9)
+        ])
     });
   }
 
@@ -26,8 +36,16 @@ export class LoginComponent implements OnInit {
   get f() {
     return this.infoUser.controls;
   }
-
+  // tslint:disable-next-line:typedef
+  get username() {
+    return this.infoUser.get('username');
+  }
+  // tslint:disable-next-line:typedef
+  get password() {
+    return this.infoUser.get('password');
+  }
   onSubmit(): void{
+    this.submitted = true;
     console.log(this.infoUser.getRawValue());
     this.authService.login(this.infoUser.getRawValue()).subscribe(res => {
         console.log(res);

@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ChangePasswordComponent implements OnInit {
   infoUser: any;
+  submitted = false;
 
   constructor( private formBuilder: FormBuilder,
                private authService: AuthService,
@@ -19,7 +20,12 @@ export class ChangePasswordComponent implements OnInit {
   ngOnInit(): void {
     this.infoUser = this.formBuilder.group({
       oldpassword: new FormControl('', Validators.required),
-      newpassword: new FormControl('', Validators.required),
+      newpassword: new FormControl('',
+        [
+          Validators.required,
+          Validators.minLength(9),
+        ]
+      ),
       confirmnewpassword: new FormControl('', Validators.required)
     });
   }
@@ -27,8 +33,20 @@ export class ChangePasswordComponent implements OnInit {
   get f() {
     return this.infoUser.controls;
   }
-
+  // tslint:disable-next-line:typedef
+  get oldpassword() {
+    return this.infoUser.get('oldpassword');
+  }
+  // tslint:disable-next-line:typedef
+  get newpassword() {
+    return this.infoUser.get('newpassword');
+  }
+  // tslint:disable-next-line:typedef
+  get confirmnewpassword() {
+    return this.infoUser.get('confirmnewpassword');
+  }
   onSubmit(): void{
+    this.submitted = true;
     if (this.f.newpassword.value === this.f.confirmnewpassword.value){
       const infochange = {
         token: this.tokenStorageService.getToken(),

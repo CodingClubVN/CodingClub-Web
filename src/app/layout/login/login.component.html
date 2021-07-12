@@ -13,6 +13,14 @@
           placeholder="Username"
           id="username"
         >
+        <div *ngIf="username?.invalid && (username?.touched || submitted)" class="text-danger mt-2">
+          <div *ngIf="username?.errors?.required">
+            <i class="fa fa-exclamation-circle" aria-hidden="true">Tên đăng nhập không được để trống</i>
+          </div>
+          <div *ngIf="username?.errors?.pattern">
+            <i class="fa fa-exclamation-circle" aria-hidden="true">Tên đăng nhập sai định dạng</i>
+          </div>
+        </div>
       </div>
       <div class="reg-form form-group my-3">
         <input
@@ -24,6 +32,14 @@
           placeholder="Password"
           id="password"
         >
+        <div *ngIf="password?.invalid && (password?.touched || submitted)" class="text-danger mt-2">
+          <div *ngIf="password?.errors?.required">
+            <i class="fa fa-exclamation-circle" aria-hidden="true">Mật khẩu không được để trống</i>
+          </div>
+          <div *ngIf="password?.errors?.minlength">
+            <i class="fa fa-exclamation-circle" aria-hidden="true">Mật khẩu phải lơn hơn 9 ký tự</i>
+          </div>
+        </div>
       </div>
     <div class="text-center pb-5">
       <button  type="submit" class="btn btn-danger">ĐĂNG NHẬP</button>

@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 export class RegisterComponent implements OnInit {
   // @ts-ignore
   infoUser: FormGroup;
+  submitted = false;
 
   constructor( private formBuilder: FormBuilder,
                private authService: AuthService,
@@ -18,12 +19,38 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.infoUser = this.formBuilder.group({
-      username: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-      firstname: new FormControl('', Validators.required),
-      lastname: new FormControl('', Validators.required),
-      phone: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
+      username: new FormControl(
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[A-Z]*[a-z]*\\d*$')
+          ]),
+      password: new FormControl(
+        '',
+        [
+          Validators.required,
+          Validators.minLength(9)
+        ]),
+      firstname: new FormControl('',
+        [
+          Validators.required,
+          Validators.pattern('[A-Z]*[a-z]*')
+        ]),
+      lastname: new FormControl('',
+        [
+        Validators.required,
+        Validators.pattern('[A-Z]*[a-z]*')
+      ]),
+      phone: new FormControl('',
+        [
+          Validators.required,
+          Validators.pattern('^0(9|8|7)\\d{8}$')
+        ]),
+      email: new FormControl('',
+        [
+          Validators.required,
+          Validators.email
+        ]),
       confirmpassword: new FormControl('', Validators.required)
     });
   }
@@ -32,6 +59,35 @@ export class RegisterComponent implements OnInit {
   get f() {
     return this.infoUser.controls;
   }
+  // tslint:disable-next-line:typedef
+  get username(){
+    return this.infoUser.get('username');
+  }
+  // tslint:disable-next-line:typedef
+  get firstname(){
+    return this.infoUser.get('firstname');
+  }
+  // tslint:disable-next-line:typedef
+  get lastname(){
+    return this.infoUser.get('lastname');
+  }
+  // tslint:disable-next-line:typedef
+  get phone(){
+    return this.infoUser.get('phone');
+  }
+  // tslint:disable-next-line:typedef
+  get email(){
+    return this.infoUser.get('email');
+  }
+  // tslint:disable-next-line:typedef
+  get password(){
+    return this.infoUser.get('password');
+  }
+  // tslint:disable-next-line:typedef
+  get confirmpassword(){
+    return this.infoUser.get('confirmpassword');
+  }
+
   checkPassword(): boolean{
     console.log(this.f.confirmpassword.value);
     if (this.f.confirmpassword.value === this.f.password.value){
@@ -42,6 +98,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void{
+    this.submitted = true;
     if (this.checkPassword()){
       const user = {
         username: this.f.username.value,
