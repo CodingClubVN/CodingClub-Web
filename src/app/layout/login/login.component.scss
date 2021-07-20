@@ -1,0 +1,27 @@
+@media only screen and (min-width: 1220px) {
+  form{
+    width: 600px !important;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .container{
+    width: 50vw;
+    height: 80vh;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .container{
+    height: 60vh;
+  }
+}
+
+form{
+  background-color: #EDEAFF;
+}
+
+input{
+  background-color: #6C757D;
+}
+button{
+  background-color: #17A2B8;
+}

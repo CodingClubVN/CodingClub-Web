@@ -1,54 +1,36 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="#">
-      <h1 class="logo mt-lg-1">CODINGCLUB</h1>
-    </a>
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid p-0 m-0">
+    <div class="col-4">
+      <a class="navbar-brand d-flex" href="#">
+        <img src="https://res.cloudinary.com/hieuduy175111/image/upload/v1625890024/CodingClub/logoCC_mijfgw.png" width="50" height="50" class="mt-lg-1">
+        <h1 class="mt-3 mt-lg-3 fw-bold title-logo">CODINGCLUB</h1>
+      </a>
+    </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" data-spy="affix" data-offset-top="700 ">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav d-sm-flex mx-xl-2 col-md-4 col-lg-4 col-xl-9">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">
-            <i class="fa fa-instagram" aria-hidden="true"></i>
-          </a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="#">
-            <i class="fa fa-facebook" aria-hidden="true"></i>
-          </a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="#">
-            <i class="fa fa-github" aria-hidden="true"></i>
-          </a>
-        </li>
+    <div class="collapse navbar-collapse col-8" id="navbarNavDropdown">
+      <ul class="navbar-nav d-sm-flex mx-xl-2 col-md-4 col-lg-7 col-xl-6 justify-content-center">
         <li class="nav-item active mx-lg-1">
-          <a class="nav-link" routerLink="/home">BLOG</a>
+          <a class="nav-link fw-bold text-dark" routerLink="/home">BÀI VIẾT</a>
         </li>
         <li class="nav-item mx-lg-1">
-          <a class="nav-link" routerLink="/home">CÔNG VIỆC</a>
-        </li>
-        <li class="nav-item dropdown mx-lg-1">
-          <a class="nav-link dropdown-toggle" href="#"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            TÍNH NĂNG
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#" >ASOI</a>
-            <a class="dropdown-item" href="#">Tool Đăng ký học phần</a>
-            <a class="dropdown-item" href="#">Tính điểm trung bình IUH</a>
-          </div>
+          <a class="nav-link fw-bold text-dark" routerLink="/home">VỀ CHÚNG TÔI</a>
         </li>
         <li class="nav-item mx-lg-1">
-          <a class="nav-link" >LIÊN HỆ</a>
+          <a class="nav-link fw-bold text-dark" >LIÊN HỆ</a>
         </li>
       </ul>
-      <ul class="navbar-nav mx-xxl-5 col-md-8 col-lg-8 col-xl-4">
-        <li class="nav-item mx-lg-1">
-          <a class="nav-link" routerLink="/login" *ngIf="!islogins">ĐĂNG NHẬP</a>
+      <ul class="navbar-nav col-md-8 col-lg-5 col-xl-6 justify-content-end">
+        <li class="nav-item ">
+          <a class="nav-link" routerLink="/register" *ngIf="!islogins">
+            <button class="btn btn-light fw-bold" style="border: 1px solid #7749F8; color: #7749F8">ĐĂNG KÝ</button>
+          </a>
         </li>
-        <li class="nav-item mx-lg-1">
-          <a class="nav-link" routerLink="/register" *ngIf="!islogins">ĐĂNG KÝ</a>
+        <li class="nav-item ">
+          <a class="nav-link" routerLink="/login" *ngIf="!islogins">
+            <button class="btn btn-primary fw-bold" style="background-color: #7749F8; border: 1px solid #7749F8">ĐĂNG NHẬP</button>
+          </a>
         </li>
         <li class="nav-item dropdown mx-lg-1">
           <a class="nav-link dropdown-toggle" routerLink="#" *ngIf="islogins" id="dropdownUserButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
