@@ -35,7 +35,7 @@ export class ApiService {
     // @ts-ignore
     return httpHeaders;
   }
-  public setHeadersFile(headers?: any): HttpHeaders {
+  public setHeadersFormData(headers?: any): HttpHeaders {
     // const token = 'Bearer ' + this.tokenStorageService.getToken();
     const token = '';
     let httpHeaders;
@@ -102,11 +102,11 @@ export class ApiService {
       );
   }
 
-  public postFile(path: string, body: any, customHeader?: any): Observable<HttpResponse<any>> {
+  public postFormData(path: string, body: any, customHeader?: any): Observable<HttpResponse<any>> {
     return this.httpClient.post<any>(
       path, body,
       {
-        headers: this.setHeadersFile(customHeader),
+        headers: this.setHeadersFormData(customHeader),
         withCredentials: false,
         observe: 'response'
       })

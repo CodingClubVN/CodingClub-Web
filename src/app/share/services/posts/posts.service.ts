@@ -14,6 +14,10 @@ export class PostsService {
               private httpClient: HttpClient) { }
   createPosts(formData: any): Observable<any>{
     const path = `${apiUrl}/api/posts`;
-    return this.apiService.postFile(path, formData);
+    return this.apiService.postFormData(path, formData);
+  }
+  getPosts(): Observable<any>{
+    const path = `${apiUrl}/api/posts`;
+    return this.apiService.get(path);
   }
 }
