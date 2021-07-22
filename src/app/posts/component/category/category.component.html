@@ -1,0 +1,8 @@
+<div class="m-3">
+  <ul class="list-unstyled d-flex d-md-inline" *ngFor="let item of category">
+    <li class="d-flex col-5 py-2 text-center my-1 my-md-3">
+      <img src="{{item.image}}" class="col-4">
+      <a routerLink="#" class="text-decoration-none text-dark fw-bold col-8 text-center">{{item.name}}</a>
+    </li>
+  </ul>
+</div>

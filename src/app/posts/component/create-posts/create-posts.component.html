@@ -1,0 +1,43 @@
+<!--<div class="">-->
+<!--  <input type = "text">-->
+<!--  <input type = "file" (change)="onFileSelected($event)">-->
+<!--  <button class="btn btn-primary" (click)="upload()">Upload</button>-->
+<!--</div>-->
+<div class="container ">
+  <div class="row h-100 justify-content-center align-items-center">
+    <form name="myForm" [formGroup]="infoPosts" (ngSubmit)="onSubmit()" class="w-100 p-5">
+      <div class="text-center">
+        <h1 class="fw-bold">Posts</h1>
+      </div>
+      <div class="reg-form form-group mt-4">
+        <label for="status" class="fw-bold">
+          Status
+        </label>
+        <input
+          class="form-control"
+          type = "text"
+          name="status"
+          formControlName="status"
+          required
+          id="status"
+        >
+      </div>
+      <div class="reg-form form-group my-3">
+        <label for="image" class="fw-bold">
+          Image
+        </label>
+        <input
+          class="form-control"
+          type = "file"
+          name="image"
+          required
+          id="image"
+          (change)="onFileSelected($event)"
+        >
+      </div>
+      <div class="text-center">
+        <button  type="submit" class="btn btn-info mt-1 fw-bolder">Post</button>
+      </div>
+    </form>
+  </div>
+</div>
