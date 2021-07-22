@@ -12,7 +12,6 @@ import {TokenStorageService} from '../auth/token-storage.service';
 export class ApiService {
 
   constructor(private httpClient: HttpClient,
-              // private storageService: StorageService
               private tokenStorageService: TokenStorageService
   ) {
   }
@@ -36,7 +35,25 @@ export class ApiService {
     // @ts-ignore
     return httpHeaders;
   }
+  public setHeadersFile(headers?: any): HttpHeaders {
+    // const token = 'Bearer ' + this.tokenStorageService.getToken();
+    const token = '';
+    let httpHeaders;
 
+    if (token) {
+      try {
+        httpHeaders = new HttpHeaders(_.assign({
+          'Content-Type': 'multipart/form-data',
+          Authorization: token
+        }, headers));
+      } catch (error) {
+        // todo
+        // this.storageService.deleteAll();
+      }
+    }
+    // @ts-ignore
+    return httpHeaders;
+  }
 
   public setUrlEncodedHeaders(headers?: any): HttpHeaders {
     // const token = 'Bearer ' + this.storageService.getToken();
@@ -77,6 +94,19 @@ export class ApiService {
       path, body,
       {
         headers: this.setHeaders(customHeader),
+        withCredentials: false,
+        observe: 'response'
+      })
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  public postFile(path: string, body: any, customHeader?: any): Observable<HttpResponse<any>> {
+    return this.httpClient.post<any>(
+      path, body,
+      {
+        headers: this.setHeadersFile(customHeader),
         withCredentials: false,
         observe: 'response'
       })

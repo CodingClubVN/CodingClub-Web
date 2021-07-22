@@ -26,11 +26,14 @@ export class UploadImgComponent implements OnInit {
   onFileSelected(event: any) {
     if (event.target.files) {
       let reader = new FileReader();
-      this.selectedFile = <File>event.target.files[0];
+      this.selectedFile = <File> event.target.files[0];
       this.imgSize = this.selectedFile.size / 1024 / 1024;
+      console.log(this.selectedFile);
+      console.log(this.selectedFile.name);
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event: any) => {
         this.imgUrl = event.target.result;
+        console.log(this.imgUrl)
       }
       if(this.imgSize > 9.8) {
         this.fileCheckerStatus = false;

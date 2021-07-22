@@ -6,20 +6,17 @@
 @media only screen and (min-width: 992px) {
   .container{
     width: 50vw;
-    height: 120vh;
+    height: 110vh;
   }
 }
 @media only screen and (max-width: 992px) {
   .container{
-    height: 120vh;
+    height: 130vh;
   }
 }
-
 form{
   background-color: #EDEAFF;
 }
-
-
 input{
   background-color: #6C757D;
 }
