@@ -7,6 +7,7 @@ import { NewPostsComponent } from './component/new-posts/new-posts.component';
 import { ListFriendComponent } from './component/list-friend/list-friend.component';
 import { TrendingPostComponent } from './component/trending-post/trending-post.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { PostsByUserComponent } from './posts-by-user/posts-by-user.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     CreatePostsComponent,
     NewPostsComponent,
     ListFriendComponent,
-    TrendingPostComponent
+    TrendingPostComponent,
+    PostsByUserComponent
   ],
   exports: [
     CategoryComponent,

@@ -20,4 +20,8 @@ export class PostsService {
     const path = `${apiUrl}/api/posts`;
     return this.apiService.get(path);
   }
+  getPostsByUser(user: any): Observable<any>{
+    const path = `${apiUrl}/api/posts/${user}`;
+    return this.apiService.get(path);
+  }
 }

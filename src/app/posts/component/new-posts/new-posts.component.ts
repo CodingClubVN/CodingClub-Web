@@ -25,4 +25,11 @@ export class NewPostsComponent implements OnInit {
       }
     );
   }
+  // tslint:disable-next-line:typedef
+  get sortData() {
+    // @ts-ignore
+    return this.posts.sort((a, b) => {
+      return (new Date(b.day_post) as any) - (new Date(a.day_post) as any);
+    });
+  }
 }
