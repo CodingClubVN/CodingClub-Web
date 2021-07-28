@@ -49,7 +49,6 @@ export class ChangePasswordComponent implements OnInit {
     this.submitted = true;
     if (this.f.newpassword.value === this.f.confirmnewpassword.value){
       const infochange = {
-        token: this.tokenStorageService.getToken(),
         newPassword: this.f.newpassword.value,
         oldPassword: this.f.oldpassword.value,
         username: this.tokenStorageService.getUsername()

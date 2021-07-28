@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ClipboardModule } from 'ngx-clipboard';
 import { PostsComponent } from './posts/posts.component';
 import {PostsModule} from './posts/posts.module';
+import { UserComponent } from './user/user.component';
+import {UserModule} from './user/user.module';
 
 
 @NgModule({
@@ -17,14 +19,16 @@ import {PostsModule} from './posts/posts.module';
     LayoutComponent,
     NavbarComponent,
     FooterComponent,
-    PostsComponent
+    PostsComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ClipboardModule,
-    PostsModule
+    PostsModule,
+    UserModule
   ],
   providers: [],
   exports: [

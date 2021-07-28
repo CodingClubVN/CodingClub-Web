@@ -8,7 +8,6 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +15,6 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     UploadImgComponent,
     LoginComponent,
     RegisterComponent,
-    ChangePasswordComponent
   ],
   imports: [
     CommonModule,

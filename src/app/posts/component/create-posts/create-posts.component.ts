@@ -43,11 +43,11 @@ export class CreatePostsComponent implements OnInit {
 
   onSubmit(): void{
     const fd: any  = new FormData();
-    fd.append('token', (this.token as string));
     fd.append('image', this.infoPosts.get('image').value);
     fd.append('status', this.infoPosts.get('status').value);
     this.postsService.createPosts(fd).subscribe(res => {
       console.log(res);
+      window.location.reload();
     });
   }
 }

@@ -32,25 +32,19 @@
             <button class="btn btn-primary fw-bold" style="background-color: #7749F8; border: 1px solid #7749F8">ĐĂNG NHẬP</button>
           </a>
         </li>
-        <li class="nav-item dropdown mx-lg-1">
-          <a class="nav-link dropdown-toggle" routerLink="#" *ngIf="islogins" id="dropdownUserButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownUserButton">
-            <a class="dropdown-item" routerLink="/changepassword" >Đổi mật khẩu</a>
-          </div>
-        </li>
         <li class="nav-item mx-lg-1">
-          <a class="nav-link" routerLink="#"  *ngIf="islogins">
-            <i class="fa fa-bell-o" aria-hidden="true"></i>
+          <a class="nav-link" routerLink="/user" *ngIf="islogins">
+            <div class="d-flex">
+              <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936061/CodingClub/javascript_bombvn.png" width="40" style="border-radius: 50px">
+              <p class="my-auto mx-2 fw-bolder text-dark">Thái Học</p>
+            </div>
           </a>
         </li>
-        <li class="nav-item mx-lg-1" style="margin-right: 20px !important">
-          <a class="nav-link" routerLink="/login" (click)="logout()" *ngIf="islogins">
-            <i class="fa fa-sign-out" aria-hidden="true"></i>
+        <li class="nav-item mx-lg-1" style="margin-right: 40px !important">
+          <a class="nav-link" routerLink="/login" *ngIf="islogins">
+            <button class="btn btn-light fw-bolder" (click)="logout()" style="border: 2px solid #17A2B8; color: #17A2B8;">Đăng xuất</button>
           </a>
         </li>
-
       </ul>
     </div>
   </div>

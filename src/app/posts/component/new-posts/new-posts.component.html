@@ -1,14 +1,21 @@
 <div class="container">
   <div *ngFor="let item of sortData" class="w-75 mx-auto mt-3 mb-5 px-4 py-5" style="background-color: #EDEAFF; border-radius: 10px">
-    <div class="d-flex text-start">
-      <a routerLink="/posts/new/{{item.username}}">
+    <div class="row w-100 text-start">
+      <a routerLink="/posts/new/{{item.username}}" class="col-2 col-md-2 col-lg-1">
         <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936061/CodingClub/javascript_bombvn.png" width="50">
       </a>
-      <div class="mx-3">
+      <div class="mx-3 col-7 col-md-8 col-lg-9">
         <a routerLink="/posts/new/{{item.username}}" class="text-decoration-none text-dark">
           <p class="fw-bold my-1">{{item.username}}</p>
         </a>
         <p class="m-0">{{item.day_post}}</p>
+      </div>
+      <div class="text-end col-1 col-md-2 col-lg-1">
+        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <li><a class="dropdown-item" (click)="deletePosts(item._id)">Xóa bài viết</a></li>
+        </ul>
       </div>
     </div>
     <div class="py-4" style="border-bottom: 2px solid black">

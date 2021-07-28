@@ -14,7 +14,6 @@ export class AuthGuard implements CanActivate {
   canActivate(){
     // @ts-ignore
     if (this.authService.isLogiedIn()){
-      console.log('guards');
       this.router.navigate(['/home']);
     }
     // @ts-ignore

@@ -24,4 +24,8 @@ export class PostsService {
     const path = `${apiUrl}/api/posts/${user}`;
     return this.apiService.get(path);
   }
+  deletePosts(id: any): Observable<any>{
+    const path = `${apiUrl}/api/posts/${id}`;
+    return this.apiService.delete(path);
+  }
 }

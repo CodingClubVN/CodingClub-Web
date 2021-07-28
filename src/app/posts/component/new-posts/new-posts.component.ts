@@ -18,7 +18,7 @@ export class NewPostsComponent implements OnInit {
       res => {
         console.log(res);
         this.posts = res.body;
-        console.log(this.posts)
+        console.log(this.posts);
       },
       error => {
         console.log(error);
@@ -31,5 +31,16 @@ export class NewPostsComponent implements OnInit {
     return this.posts.sort((a, b) => {
       return (new Date(b.day_post) as any) - (new Date(a.day_post) as any);
     });
+  }
+
+  deletePosts(id: any): void{
+    this.postsService.deletePosts(id).subscribe(
+      res => {
+        window.location.reload();
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }
