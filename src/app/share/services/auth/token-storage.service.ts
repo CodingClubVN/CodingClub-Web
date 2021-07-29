@@ -22,7 +22,7 @@ export class TokenStorageService {
   public saveUsername(username: string): void {
     window.sessionStorage.setItem(USERNAME_KEY, username);
   }
-  public getUsername(): void{
-    window.sessionStorage.getItem(USERNAME_KEY);
+  public getUsername(): any{
+    return window.sessionStorage.getItem(USERNAME_KEY);
   }
 }

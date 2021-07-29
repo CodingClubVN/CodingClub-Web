@@ -26,7 +26,7 @@ export class AuthService {
   }
   changePassword(info: any): Observable<any> {
     const url = `${apiUrl}/api/auth/change-password`;
-    return this.apiService.post(url, info);
+    return this.apiService.put(url, info);
   }
   isLogiedIn(): void{
     return this.getJwtToken();

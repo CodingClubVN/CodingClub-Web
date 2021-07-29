@@ -50,9 +50,9 @@ export class ChangePasswordComponent implements OnInit {
     if (this.f.newpassword.value === this.f.confirmnewpassword.value){
       const infochange = {
         newPassword: this.f.newpassword.value,
-        oldPassword: this.f.oldpassword.value,
-        username: this.tokenStorageService.getUsername()
+        oldPassword: this.f.oldpassword.value
       };
+      console.log(infochange);
       this.authService.changePassword(infochange).subscribe(res => {
           console.log(res);
         },
