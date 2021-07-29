@@ -13,6 +13,8 @@ export class PersonalInformationComponent implements OnInit {
   infoUser: any;
   username: any;
   editProfile = false;
+  imgUrl: any;
+  checkTagetImg = false;
   constructor(private userService: UserService,
               private tokenStorageService: TokenStorageService,
               private formBuilder: FormBuilder) { }
@@ -22,7 +24,8 @@ export class PersonalInformationComponent implements OnInit {
       lastname: new FormControl('', Validators.required),
       firstname: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
-      phone: new FormControl('', Validators.required)
+      phone: new FormControl('', Validators.required),
+      avatar: [null]
     });
     this.getUsername();
     this.getUser(this.username);
@@ -51,6 +54,19 @@ export class PersonalInformationComponent implements OnInit {
       }
     );
   }
+  onFileSelected(event: any): void {
+    if (event.target.files){
+      this.checkTagetImg = true;
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.imgUrl = event.target.result;
+        console.log(this.imgUrl);
+      };
+      const file = (event.target.files[0] as File);
+      this.infoUser.get('avatar').setValue(file);
+    }
+  }
   onSubmit(): void{
     const fd: any  = new FormData();
     if (this.personalInformation.lastname !== this.infoUser.get('lastname').value){
@@ -65,6 +81,12 @@ export class PersonalInformationComponent implements OnInit {
     if (this.personalInformation.phone !== this.infoUser.get('phone').value){
       fd.append('phone', this.infoUser.get('phone').value);
     }
+    if (this.infoUser.get('avatar').value !== null){
+      fd.append('avatar', this.infoUser.get('avatar').value);
+    }
+    for (const value of fd.values()){
+      console.log(value);
+    }
     this.userService.putUserByUsername(this.username, fd).subscribe(
       res => {
         console.log(res);
@@ -78,4 +100,5 @@ export class PersonalInformationComponent implements OnInit {
   reload(): void{
     window.location.reload();
   }
+
 }
