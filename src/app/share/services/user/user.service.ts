@@ -15,4 +15,8 @@ export class UserService {
     const path = `${apiUrl}/api/users/${username}`;
     return this.apiService.get(path);
   }
+  putUserByUsername(username: any, info: any): Observable<any>{
+    const path = `${apiUrl}/api/users/${username}`;
+    return this.apiService.putFormdata(path, info);
+  }
 }

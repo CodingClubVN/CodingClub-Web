@@ -154,6 +154,18 @@ export class ApiService {
         catchError(this.errorHandler)
       );
   }
+  public putFormdata(path: string, body?: any): Observable<any> {
+    return this.httpClient.put(
+      path, body,
+      {
+        headers: this.setHeadersFormData(),
+        withCredentials: false,
+        observe: 'response'
+      })
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
 
 
   public delete(path: string): Observable<any> {
