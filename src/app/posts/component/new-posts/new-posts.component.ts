@@ -14,7 +14,9 @@ export class NewPostsComponent implements OnInit {
   checkLike = false;
   username: any;
   arrayUser: any = [];
-  userLike: any = [];
+  userLike: Array<any> = [];
+  array: any = [];
+  arrayUsername: any = [];
   constructor(private postsService: PostsService,
               private tokenStorageService: TokenStorageService) {
     this.username = this.tokenStorageService.getUsername();
@@ -55,7 +57,8 @@ export class NewPostsComponent implements OnInit {
   getLikeByPosts(id: any): void{
     this.postsService.getLike(id).subscribe(
       res => {
-        this.listLike.push(res);
+          this.listLike.push(res);
+          console.log(this.listLike);
       },
       error => {
         console.log(error);
@@ -63,27 +66,40 @@ export class NewPostsComponent implements OnInit {
     );
   }
 
-  likeEven(id: any): void{
-    this.listLike.map((item: { array_username: any; }) => {
-      if (item.array_username.length !== 0){
-        this.arrayUser = item.array_username;
+  likeEven(postID: any): void{
+    this.array = this.listLike.filter((item: { post_id: any; array_username: any; }) => {
+      if (item.post_id === postID){
+        return item.array_username;
       }
     });
-    this.userLike = this.arrayUser.filter((item: any) => this.username = item);
-    if (this.userLike.length !== 0){
-      this.postsService.DeleteLike(id).subscribe(
+    console.log(this.array);
+    this.arrayUser = this.array.map((item: { array_username: any; }) => {
+      return item.array_username;
+    });
+    console.log(this.arrayUser);
+    this.arrayUser.map((item: any) => this.userLike = item);
+    console.log(this.userLike);
+    this.arrayUsername = this.userLike.filter(item => {
+      if (this.username === item){
+        return item;
+      }
+    });
+    console.log(this.arrayUsername);
+    if (this.arrayUsername.length === 0){
+      const data = {
+        post_id: postID
+      };
+      this.postsService.postLike(data).subscribe(
         res => {
           this.loadData();
+          console.log(res);
         },
         error => {
           console.log(error);
         }
       );
     }else{
-      const data = {
-        post_id: id
-      };
-      this.postsService.postLike(data).subscribe(
+      this.postsService.DeleteLike(postID).subscribe(
         res => {
           this.loadData();
         },
@@ -91,7 +107,6 @@ export class NewPostsComponent implements OnInit {
           console.log(error);
         }
       );
-
     }
   }
 }

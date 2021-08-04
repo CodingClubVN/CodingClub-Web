@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngFor="let item of posts; let like of listLike" class="w-75 mx-auto mt-3 mb-5 px-4 py-5" style="background-color: #EDEAFF; border-radius: 10px">
+  <div *ngFor="let item of posts; let like of listLike;" class="w-75 mx-auto mt-3 mb-5 px-4 py-5" style="background-color: #EDEAFF; border-radius: 10px">
     <div class="row w-100 text-start">
       <a routerLink="/posts/new/{{item.username}}" class="col-2 col-md-2 col-lg-1">
         <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936061/CodingClub/javascript_bombvn.png" width="50">
@@ -28,7 +28,7 @@
       <div class="col-6 d-flex justify-content-center" (click)="likeEven(item.post_id)">
         <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936061/CodingClub/like_lqtzrc.png" width="40">
         <p class="my-auto mx-2">Thích</p>
-        <p>{{like.post_id}}</p>
+        <p>{{like._id}}</p>
       </div>
       <div class="col-6 d-flex justify-content-center">
         <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936060/CodingClub/commnet_yxp3us.png" width="40">
