@@ -11,5 +11,12 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  addClass(): void{
+    // tslint:disable-next-line:only-arrow-functions typedef
+    window.addEventListener('scroll', function(){
+      const nav = document.querySelector('app-category');
+      // @ts-ignore
+      nav.classList.toggle('sticky', window.scrollY > 0);
+    });
+  }
 }

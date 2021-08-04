@@ -3,6 +3,8 @@ import { ApiService } from '../core/_core.service';
 import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import {LikeModel} from '../../model/like/like.model';
+import {map} from 'rxjs/operators';
 
 const apiUrl = `${environment.apiUrl}`;
 @Injectable({
@@ -27,5 +29,36 @@ export class PostsService {
   deletePosts(id: any): Observable<any>{
     const path = `${apiUrl}/api/posts/${id}`;
     return this.apiService.delete(path);
+  }
+  getLike(id: any): Observable<any>{
+    const path = `${apiUrl}/api/post/likes/${id}`;
+    // @ts-ignore
+    return this.apiService.get<LikeModel>(path).pipe(
+      map(response => response.body)
+    );
+  }
+  postLike(postID: any): Observable<any>{
+    const path = `${apiUrl}/api/post/likes`;
+    return this.apiService.post(path, postID);
+  }
+  DeleteLike(id: any): Observable<any>{
+    const path = `${apiUrl}/api/post/likes/${id}`;
+    return this.apiService.delete(path);
+  }
+  getComments(id: any): Observable<any>{
+    const path = `${apiUrl}/api/posts/comments/${id}`;
+    return this.apiService.get(path);
+  }
+  postComments(data: any): Observable<any>{
+    const path = `${apiUrl}/api/posts/comments`;
+    return this.apiService.post(path, data);
+  }
+  putComments(id: any, data: any): Observable<any>{
+    const path = `${apiUrl}/api/posts/comments/${id}`;
+    return this.apiService.put(path, data);
+  }
+  deleteComment(id: any): Observable<any>{
+    const path = `${apiUrl}/api/posts/comments/${id}`;
+    return this.apiService.delete(id);
   }
 }
