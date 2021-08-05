@@ -57,8 +57,8 @@ export class NewPostsComponent implements OnInit {
   getLikeByPosts(id: any): void{
     this.postsService.getLike(id).subscribe(
       res => {
-          this.listLike.push(res);
-          console.log(this.listLike);
+        this.listLike.push(res);
+        console.log(this.listLike);
       },
       error => {
         console.log(error);
@@ -91,6 +91,7 @@ export class NewPostsComponent implements OnInit {
       };
       this.postsService.postLike(data).subscribe(
         res => {
+          this.listLike = [];
           this.loadData();
           console.log(res);
         },
@@ -101,7 +102,9 @@ export class NewPostsComponent implements OnInit {
     }else{
       this.postsService.DeleteLike(postID).subscribe(
         res => {
+          this.listLike = [];
           this.loadData();
+          console.log(res);
         },
         error => {
           console.log(error);

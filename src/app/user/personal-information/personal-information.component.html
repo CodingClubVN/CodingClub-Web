@@ -1,25 +1,25 @@
 <div class="container my-5">
   <div class="info-user mx-auto p-5" *ngIf="!this.editProfile">
     <div class="text-center">
-      <img src="{{this.personalInformation.imgAvatar}}" width="100" height="100" style="border-radius: 100px">
-      <h3 class="mt-3">{{this.personalInformation.lastname}} {{this.personalInformation.firstname}}</h3>
+      <img src="{{this.personalInformation?.imgAvatar}}" width="100" height="100" style="border-radius: 100px">
+      <h3 class="mt-3">{{this.personalInformation?.lastname}} {{this.personalInformation?.firstname}}</h3>
     </div>
     <div class="mx-3">
       <div class="mt-5">
         <label class="fw-bolder">Username:</label>
-        <span class="mx-2 fw-bolder">{{this.personalInformation.username}}</span>
+        <span class="mx-2 fw-bolder">{{this.personalInformation?.username}}</span>
       </div>
       <div class="mt-3">
         <label class="fw-bolder">Họ tên:</label>
-        <span class="mx-2 fw-bolder">{{this.personalInformation.lastname}} {{this.personalInformation.firstname}}</span>
+        <span class="mx-2 fw-bolder">{{this.personalInformation?.lastname}} {{this.personalInformation?.firstname}}</span>
       </div>
       <div class="mt-3">
         <label class="fw-bolder">Email:</label>
-        <span class="mx-2 fw-bolder">{{this.personalInformation.email}}</span>
+        <span class="mx-2 fw-bolder">{{this.personalInformation?.email}}</span>
       </div>
       <div class="mt-3">
         <label class="fw-bolder">Số điện thoại:</label>
-        <span class="mx-2 fw-bolder">{{this.personalInformation.phone}}</span>
+        <span class="mx-2 fw-bolder">{{this.personalInformation?.phone}}</span>
       </div>
       <div class="mt-5 text-center">
         <button class="btn btn-light" (click)="this.editProfile = !this.editProfile">Chỉnh sửa thông tin cá nhân</button>
@@ -28,13 +28,13 @@
   </div>
   <form name="myForm" [formGroup]="infoUser" (ngSubmit)="onSubmit()" class="w-50 mx-auto p-3 p-md-5" *ngIf="this.editProfile">
     <div class="text-center">
-      <img src="{{this.checkTagetImg ? this.imgUrl : this.personalInformation.imgAvatar}}" width="100" height="100" style="border-radius: 100px">
+      <img src="{{this.checkTagetImg ? this.imgUrl : this.personalInformation?.imgAvatar}}" width="100" height="100" style="border-radius: 100px">
       <br>
       <label for="avatar" id="buttonAddImage">
         Thay đổi ảnh đại diện
       </label>
       <input type="file" id="avatar" class="d-none" (change)="onFileSelected($event)">
-      <h3 class="mt-3">{{this.personalInformation.lastname}} {{this.personalInformation.firstname}}</h3>
+      <h3 class="mt-3">{{this.personalInformation?.lastname}} {{this.personalInformation?.firstname}}</h3>
     </div>
     <div class="reg-form form-group mt-5">
       <label for="lastname" class="fw-bold">
