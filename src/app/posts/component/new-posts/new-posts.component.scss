@@ -4,3 +4,16 @@
 .dropdown>.dropdown-toggle:active {
   pointer-events: none;
 }
+.dropdown-menu{
+  background-color: black;
+  opacity: 0.8;
+  border-radius: 10px;
+}
+.dropdown-menu li a:hover{
+  color: black !important;
+}
+.comment-content{
+  background-color: rgba(255,255,255,0.6);
+  padding: 5px 20px;
+  border-radius: 10px;
+}

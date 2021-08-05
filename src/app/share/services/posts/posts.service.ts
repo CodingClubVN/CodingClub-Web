@@ -46,19 +46,21 @@ export class PostsService {
     return this.apiService.delete(path);
   }
   getComments(id: any): Observable<any>{
-    const path = `${apiUrl}/api/posts/comments/${id}`;
-    return this.apiService.get(path);
+    const path = `${apiUrl}/api/post/comments/${id}`;
+    return this.apiService.get(path).pipe(
+      map(response => response.body)
+    );
   }
   postComments(data: any): Observable<any>{
-    const path = `${apiUrl}/api/posts/comments`;
+    const path = `${apiUrl}/api/post/comments`;
     return this.apiService.post(path, data);
   }
   putComments(id: any, data: any): Observable<any>{
-    const path = `${apiUrl}/api/posts/comments/${id}`;
+    const path = `${apiUrl}/api/post/comments/${id}`;
     return this.apiService.put(path, data);
   }
   deleteComment(id: any): Observable<any>{
-    const path = `${apiUrl}/api/posts/comments/${id}`;
+    const path = `${apiUrl}/api/post/comments/${id}`;
     return this.apiService.delete(id);
   }
 }

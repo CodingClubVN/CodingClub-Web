@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../../../share/services/posts/posts.service';
 import {TokenStorageService} from '../../../share/services/auth/token-storage.service';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-new-posts',
@@ -13,37 +14,42 @@ export class NewPostsComponent implements OnInit {
   idPost: any;
   checkLike = false;
   username: any;
-  arrayUser: any = [];
-  userLike: Array<any> = [];
-  array: any = [];
-  arrayUsername: any = [];
+  infoComment: any;
+  listComment: any = [];
+  commentLenght: any;
   constructor(private postsService: PostsService,
-              private tokenStorageService: TokenStorageService) {
+              private tokenStorageService: TokenStorageService,
+              private formBuilder: FormBuilder) {
     this.username = this.tokenStorageService.getUsername();
   }
 
   ngOnInit(): void {
+    this.initForm();
     this.loadData();
   }
+  initForm(): void{
+    this.infoComment = this.formBuilder.group({
+      status: new FormControl('')
+    });
+  }
+  // start Render data
   loadData(): void{
     this.postsService.getPosts().subscribe(
       res => {
         this.posts = res.body as string[];
-        this.posts.forEach((item: { post_id: any; }) => this.getLikeByPosts(item.post_id));
+        this.posts.forEach((item: { post_id: any; }) => {
+          this.getLikeByPosts(item.post_id);
+          this.getCommentByID(item.post_id);
+        });
+        this.sortData();
       },
       error => {
         console.log(error);
       }
     );
   }
-  // tslint:disable-next-line:typedef
-  get sortData() {
-    // @ts-ignore
-    return this.posts.sort((a, b) => {
-      return (new Date(b.day_post) as any) - (new Date(a.day_post) as any);
-    });
-  }
-
+  // end Render data
+  // start handle delete post
   deletePosts(id: any): void{
     this.postsService.deletePosts(id).subscribe(
       res => {
@@ -54,44 +60,49 @@ export class NewPostsComponent implements OnInit {
       }
     );
   }
+  // end handle delete post
+  // start handle like
   getLikeByPosts(id: any): void{
     this.postsService.getLike(id).subscribe(
       res => {
         this.listLike.push(res);
-        console.log(this.listLike);
+        // let usernameArr: any[] = [];
+        // this.listLike.map((item: any) => usernameArr = item.array_username);
+        // console.log(usernameArr);
       },
       error => {
         console.log(error);
       }
     );
   }
-
   likeEven(postID: any): void{
-    this.array = this.listLike.filter((item: { post_id: any; array_username: any; }) => {
+    let arrayUser: any = [];
+    let userLike: Array<any> = [];
+    let array = [];
+    let arrayUsername: any = [];
+    array = this.listLike.filter((item: { post_id: any; array_username: any; }) => {
       if (item.post_id === postID){
         return item.array_username;
       }
     });
-    console.log(this.array);
-    this.arrayUser = this.array.map((item: { array_username: any; }) => {
+    arrayUser = array.map((item: { array_username: any; }) => {
       return item.array_username;
     });
-    console.log(this.arrayUser);
-    this.arrayUser.map((item: any) => this.userLike = item);
-    console.log(this.userLike);
-    this.arrayUsername = this.userLike.filter(item => {
+    arrayUser.map((item: any) => userLike = item);
+    arrayUsername = userLike.filter(item => {
       if (this.username === item){
         return item;
       }
     });
-    console.log(this.arrayUsername);
-    if (this.arrayUsername.length === 0){
+    if (arrayUsername.length === 0){
       const data = {
         post_id: postID
       };
       this.postsService.postLike(data).subscribe(
         res => {
+          this.checkLike = true;
           this.listLike = [];
+          this.listComment = [];
           this.loadData();
           console.log(res);
         },
@@ -102,7 +113,9 @@ export class NewPostsComponent implements OnInit {
     }else{
       this.postsService.DeleteLike(postID).subscribe(
         res => {
+          this.checkLike = false;
           this.listLike = [];
+          this.listComment = [];
           this.loadData();
           console.log(res);
         },
@@ -111,5 +124,42 @@ export class NewPostsComponent implements OnInit {
         }
       );
     }
+  }
+  // end handle like
+  // start handle comment
+  get f() {
+    return this.infoComment.controls;
+  }
+  sortData(): void {
+    return this.posts.sort((a: { day_post: string | number | Date; }, b: { day_post: string | number | Date; }) => {
+      return (new Date(b.day_post) as any) - (new Date(a.day_post) as any);
+    });
+  }
+  sendComment(postID: any): void{
+    const dataPost = {
+      post_id: postID,
+      message: this.f.status.value
+    };
+    this.postsService.postComments(dataPost).subscribe(
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  getCommentByID(id: any): void{
+    this.postsService.getComments(id).subscribe(
+      res => {
+        this.listComment.push(res);
+        this.commentLenght = this.listComment.length;
+        console.log(this.listComment);
+        console.log(this.commentLenght);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }
