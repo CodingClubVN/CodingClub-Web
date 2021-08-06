@@ -205,7 +205,7 @@ export class NewPostsComponent implements OnInit {
       id: idComment,
       newMessage: this.formEdit.newMessage.value
     };
-    this.postsService.putComments(postsID,dataEditComment).subscribe(
+    this.postsService.putComments(postsID, dataEditComment).subscribe(
       res => {
         this.listLike = [];
         this.listComment = [];
