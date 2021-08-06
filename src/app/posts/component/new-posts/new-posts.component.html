@@ -66,23 +66,25 @@
               </div>
               <div class="comment-content mt-2">
                 <p class="m-0 text-start fw-bolder text-dark">{{itemComment.username}}</p>
-                <p class="text-start text-dark" *ngIf="!this.checkEditComment">{{itemComment.message}}</p>
-<!--                <form-->
-<!--                  name="formEditComment"-->
-<!--                  [formGroup]="infoEditComment"-->
-<!--                  (ngSubmit)="summitEditComment(comment.post_id, itemComment.id)"-->
-<!--                  *ngIf="this.checkEditComment"-->
-<!--                >-->
-<!--                  <div>-->
-<!--                    <input-->
-<!--                      type="text"-->
-<!--                      class="form-control"-->
-<!--                      formControlName="newMessage"-->
-<!--                      id="newMessage"-->
-<!--                      name="newMessage"-->
-<!--                    >-->
-<!--                  </div>-->
-<!--                </form>-->
+                <div *ngIf="!this.checkEditComment">
+                  <p class="text-start text-dark">{{itemComment.message}}</p>
+                </div>
+                <form
+                  name="formEditComment"
+                  [formGroup]="infoEditComment"
+                  (ngSubmit)="summitEditComment(comment.post_id, itemComment.id)"
+                  *ngIf="this.checkEditComment && this.idComment === itemComment.id"
+                >
+                  <div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="newMessage"
+                      id="newMessage"
+                      name="newMessage"
+                    >
+                  </div>
+                </form>
               </div>
               <div class="dropdown mx-2 my-auto">
                 <a class="" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -90,7 +92,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <a class="dropdown-item text-light" (click)="deleteComments(comment.post_id,itemComment.id)">Xóa Bình Luận</a>
-                  <a class="dropdown-item text-light" (click)="editComment()">Chỉnh sửa bình luận</a>
+                  <a class="dropdown-item text-light" (click)="editComment(itemComment.id, itemComment.message)">Chỉnh sửa bình luận</a>
                 </div>
               </div>
             </div>

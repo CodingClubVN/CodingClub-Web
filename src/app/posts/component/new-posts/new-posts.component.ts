@@ -20,6 +20,7 @@ export class NewPostsComponent implements OnInit {
   renderComment = false;
   checkEditComment = false;
   infoEditComment: any;
+  idComment: any;
   constructor(private postsService: PostsService,
               private tokenStorageService: TokenStorageService,
               private formBuilder: FormBuilder) {
@@ -28,6 +29,7 @@ export class NewPostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.initFormEditComment();
     this.loadData();
   }
   initForm(): void{
@@ -127,6 +129,14 @@ export class NewPostsComponent implements OnInit {
   }
   // end handle like
   // start handle comment
+  initFormEditComment(): void{
+    this.infoEditComment = this.formBuilder.group({
+      newMessage: new FormControl(''),
+    });
+  }
+  get formEdit() {
+    return this.infoEditComment.controls;
+  }
   get f() {
     return this.infoComment.controls;
   }
@@ -185,11 +195,27 @@ export class NewPostsComponent implements OnInit {
       }
     );
   }
-  editComment(): void{
+  editComment(id: any, message: any): void{
     this.checkEditComment = true;
+    this.idComment = id;
+    this.formEdit.newMessage.value = message;
   }
-  summitEditComment(postsID: any, id: any): void{
-
+  summitEditComment(postsID: any, idComment: any): void{
+    const dataEditComment = {
+      id: idComment,
+      newMessage: this.formEdit.newMessage.value
+    };
+    this.postsService.putComments(postsID,dataEditComment).subscribe(
+      res => {
+        this.listLike = [];
+        this.listComment = [];
+        this.loadData();
+        this.checkEditComment = false;
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
   // end handle comment
 }
