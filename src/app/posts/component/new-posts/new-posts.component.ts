@@ -17,6 +17,9 @@ export class NewPostsComponent implements OnInit {
   infoComment: any;
   listComment: any = [];
   commentLenght: any;
+  renderComment = false;
+  checkEditComment = false;
+  infoEditComment: any;
   constructor(private postsService: PostsService,
               private tokenStorageService: TokenStorageService,
               private formBuilder: FormBuilder) {
@@ -66,9 +69,6 @@ export class NewPostsComponent implements OnInit {
     this.postsService.getLike(id).subscribe(
       res => {
         this.listLike.push(res);
-        // let usernameArr: any[] = [];
-        // this.listLike.map((item: any) => usernameArr = item.array_username);
-        // console.log(usernameArr);
       },
       error => {
         console.log(error);
@@ -142,7 +142,11 @@ export class NewPostsComponent implements OnInit {
     };
     this.postsService.postComments(dataPost).subscribe(
       res => {
+        this.listLike = [];
+        this.listComment = [];
+        this.loadData();
         console.log(res);
+        this.f.status.value = '';
       },
       error => {
         console.log(error);
@@ -162,4 +166,30 @@ export class NewPostsComponent implements OnInit {
       }
     );
   }
+  functionRenderComment(): void{
+    this.renderComment = true;
+  }
+  deleteComments(postsID: any, idComment: any): void{
+    const dataDelete = {
+      id: idComment
+    };
+    console.log(dataDelete);
+    this.postsService.deleteComment(postsID, dataDelete).subscribe(
+      res => {
+        this.listLike = [];
+        this.listComment = [];
+        this.loadData();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  editComment(): void{
+    this.checkEditComment = true;
+  }
+  summitEditComment(postsID: any, id: any): void{
+
+  }
+  // end handle comment
 }

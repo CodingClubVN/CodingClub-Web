@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '../core/_core.service';
 import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LikeModel} from '../../model/like/like.model';
 import {map} from 'rxjs/operators';
 
@@ -59,8 +59,8 @@ export class PostsService {
     const path = `${apiUrl}/api/post/comments/${id}`;
     return this.apiService.put(path, data);
   }
-  deleteComment(id: any): Observable<any>{
+  deleteComment(id: any, bodyComments: any): Observable<any>{
     const path = `${apiUrl}/api/post/comments/${id}`;
-    return this.apiService.delete(id);
+    return this.apiService.deleteBody(path, bodyComments);
   }
 }

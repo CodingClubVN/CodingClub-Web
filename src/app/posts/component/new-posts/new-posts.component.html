@@ -39,7 +39,7 @@
         </div>
         <div *ngFor="let comment of listComment" class="text-start mx-1 mt-3 w-auto">
           <div *ngIf="comment.post_id === itemPosts.post_id">
-            <a>
+            <a (click)="functionRenderComment()">
               <i class="fa fa-comment-o" aria-hidden="true"></i> {{comment.array_comments.length}}
             </a>
           </div>
@@ -51,13 +51,13 @@
         <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936061/CodingClub/like_lqtzrc.png" width="40">
         <p class="my-auto mx-2" [class] = "this.checkLike ? 'text-primary' : 'text-dark'">Thích</p>
       </div>
-      <div class="col-6 d-flex justify-content-center">
+      <div class="col-6 d-flex justify-content-center" (click)="functionRenderComment()">
         <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936060/CodingClub/commnet_yxp3us.png" width="40">
         <p class="my-auto mx-2">Bình luận</p>
       </div>
     </div>
     <div class="comment mt-3 text-end">
-      <div *ngFor="let comment of listComment">
+      <div *ngFor="let comment of listComment" [class] = "this.renderComment ? '' : 'd-none'">
         <div *ngIf="comment.post_id === itemPosts.post_id">
           <div *ngFor="let itemComment of comment.array_comments">
             <div class="d-flex">
@@ -66,7 +66,32 @@
               </div>
               <div class="comment-content mt-2">
                 <p class="m-0 text-start fw-bolder text-dark">{{itemComment.username}}</p>
-                <p class="text-start text-dark">{{itemComment.message}}</p>
+                <p class="text-start text-dark" *ngIf="!this.checkEditComment">{{itemComment.message}}</p>
+<!--                <form-->
+<!--                  name="formEditComment"-->
+<!--                  [formGroup]="infoEditComment"-->
+<!--                  (ngSubmit)="summitEditComment(comment.post_id, itemComment.id)"-->
+<!--                  *ngIf="this.checkEditComment"-->
+<!--                >-->
+<!--                  <div>-->
+<!--                    <input-->
+<!--                      type="text"-->
+<!--                      class="form-control"-->
+<!--                      formControlName="newMessage"-->
+<!--                      id="newMessage"-->
+<!--                      name="newMessage"-->
+<!--                    >-->
+<!--                  </div>-->
+<!--                </form>-->
+              </div>
+              <div class="dropdown mx-2 my-auto">
+                <a class="" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item text-light" (click)="deleteComments(comment.post_id,itemComment.id)">Xóa Bình Luận</a>
+                  <a class="dropdown-item text-light" (click)="editComment()">Chỉnh sửa bình luận</a>
+                </div>
               </div>
             </div>
           </div>
@@ -85,11 +110,10 @@
               formControlName="status"
               placeholder="Bình luận ..."
               required
-              id="status"
-            >
+              id="status">
           </div>
         </div>
       </form>
-      <div>
-      </div>
     </div>
+  </div>
+</div>

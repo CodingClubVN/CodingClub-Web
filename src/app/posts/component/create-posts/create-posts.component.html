@@ -1,13 +1,10 @@
-<!--<div class="">-->
-<!--  <input type = "text">-->
-<!--  <input type = "file" (change)="onFileSelected($event)">-->
-<!--  <button class="btn btn-primary" (click)="upload()">Upload</button>-->
-<!--</div>-->
-<div class="container" *ngIf="isLogins">
-  <div class="row h-100 justify-content-center align-items-center">
-    <form name="myForm" [formGroup]="infoPosts" (ngSubmit)="onSubmit()" class="w-100 p-5">
+<div class="container mt-3" *ngIf="isLogins">
+  <div class="content row h-100 justify-content-center align-items-center w-75 mx-auto">
+    <form name="myForm" [formGroup]="infoPosts" (ngSubmit)="onSubmit()" class="w-100 px-5">
       <div class="row reg-form form-group mt-4 d-flex">
-        <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936061/CodingClub/javascript_bombvn.png" class="col-3 col-md-1" width="50">
+        <div class="col-3 col-md-1">
+          <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936061/CodingClub/javascript_bombvn.png" class="p-0" width="40">
+        </div>
         <div class="col-9 col-md-11 my-auto">
           <input
             class="form-control"
@@ -21,7 +18,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="reg-form form-group my-3 col-3 mx-5">
+        <div class="reg-form form-group my-3 col-3 mx-md-5 col-lg-4 p-0">
           <label for="image" class="image">
             <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626971620/CodingClub/baseline_add_photo_alternate_black_24dp.png.png">
             Choose a file
@@ -35,8 +32,8 @@
             (change)="onFileSelected($event)"
           >
         </div>
-        <div class="text-end my-auto col-7">
-          <button  type="submit" class="btn btn-info mt-1 fw-bolder">Đăng bài</button>
+        <div class="text-end my-auto col-4 col-md-4 col-xl-4 col-xxl-5 ">
+          <button  type="submit" class="btn btn-light mt-1 fw-bolder">Đăng bài</button>
         </div>
       </div>
     </form>

@@ -174,8 +174,19 @@ export class ApiService {
       {
         headers: this.setHeaders(),
         withCredentials: false,
-        observe: 'response'
+        observe: 'response',
       })
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+  public deleteBody(path: string, bodyDelete?: any): Observable<any> {
+    const option = {
+      headers: this.setHeaders(),
+      body: bodyDelete,
+    };
+    return this.httpClient.delete(
+      path, option)
       .pipe(
         catchError(this.errorHandler)
       );
