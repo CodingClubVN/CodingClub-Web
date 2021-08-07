@@ -1,3 +1,18 @@
 li{
   background-color: #EDEAFF;
 }
+@media only screen and (min-width: 1450px) {
+  li{
+    width: 60%;
+  }
+}
+@media only screen and (max-width: 1450px) {
+  li{
+    width: 80%;
+  }
+}
+@media only screen and (max-width: 910px) {
+  li{
+    width: 90%;
+  }
+}

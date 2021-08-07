@@ -1,5 +1,5 @@
-<div class="container">
-  <div *ngFor="let itemPosts of posts;  let i = index" class="w-75 mx-auto mt-3 mb-5 px-4 py-5" style="background-color: #EDEAFF; border-radius: 10px">
+<div class="container-fluid">
+  <div *ngFor="let itemPosts of posts;  let i = index" class="content-post mx-auto mt-3 mb-5 px-4 py-5" style="background-color: #EDEAFF; border-radius: 10px">
     <div class="row w-100 text-start">
       <a routerLink="/posts/new/{{itemPosts.username}}" class="col-2 col-md-2 col-lg-1">
         <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936061/CodingClub/javascript_bombvn.png" width="50">

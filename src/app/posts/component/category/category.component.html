@@ -1,8 +1,10 @@
 <div class="m-3" id="category">
   <ul class="list-unstyled d-flex d-md-inline" *ngFor="let item of category" style="overflow-x: auto">
-    <li class="d-flex col-5 py-2 text-center my-1 my-md-3">
-      <img src="{{item.image}}" width="30" class="mx-auto">
-      <a routerLink="#" class="text-decoration-none text-dark fw-bold col-8 text-center">{{item.name}}</a>
+    <li class="row py-2 mt-2">
+      <div class="col-3">
+        <img src="{{item.image}}" width="30">
+      </div>
+      <a routerLink="#" class="text-decoration-none text-dark fw-bold text-center col-9">{{item.name}}</a>
     </li>
   </ul>
 </div>
