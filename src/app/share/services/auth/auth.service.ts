@@ -28,10 +28,13 @@ export class AuthService {
     const url = `${apiUrl}/api/auth/change-password`;
     return this.apiService.put(url, info);
   }
+  logout(): Observable<any>{
+    const url = `${apiUrl}/api/auth/logout`;
+    return this.apiService.get(url);
+  }
   isLogiedIn(): void{
     return this.getJwtToken();
   }
-
   getJwtToken(): void{
     return this.tokenStorageService.getToken();
   }

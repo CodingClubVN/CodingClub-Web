@@ -1,0 +1,16 @@
+.sticky{
+  margin-top: 50px;
+  position: fixed;
+  right: 0;
+}
+@media only screen and (max-width: 768px) {
+  .section-right{
+    display: none;
+  }
+  .sticky{
+    display: none;
+  }
+  li{
+    width: 90%;
+  }
+}

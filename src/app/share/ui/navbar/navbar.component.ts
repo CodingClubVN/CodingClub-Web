@@ -36,5 +36,6 @@ export class NavbarComponent implements OnInit {
   logout(): void{
     this.islogins = false;
     this.tokenStorageService.signOut();
+    this.authService.logout();
   }
 }

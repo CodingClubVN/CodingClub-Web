@@ -61,7 +61,15 @@ export class CategoryComponent implements OnInit {
     }
   ];
   constructor() { }
-
+  addClass(): void{
+    // tslint:disable-next-line:only-arrow-functions typedef
+    window.addEventListener('scroll', function(){
+      const nav = document.querySelector('.category');
+      // @ts-ignore
+      nav.classList.toggle('sticky', window.scrollY > 100);
+    });
+  }
   ngOnInit(): void {
+    this.addClass()
   }
 }
