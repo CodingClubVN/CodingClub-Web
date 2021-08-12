@@ -8,6 +8,8 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ContactComponent } from './contact/contact.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     UploadImgComponent,
     LoginComponent,
     RegisterComponent,
+    ContactComponent,
+    AboutUsComponent,
   ],
   imports: [
     CommonModule,
