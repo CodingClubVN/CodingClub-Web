@@ -4,52 +4,13 @@
       <i class="fa fa-star" aria-hidden="true"></i>
       <h6 class="mx-1">Top trending</h6>
     </div>
-    <div class="w-100 d-flex mt-3">
+    <div class="w-100 d-flex mt-3 pb-2" *ngFor="let item of listTrendingPosts" style="border-bottom: 1px solid black">
       <div>
-        <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936060/CodingClub/html_xqnr53.png" width="100">
+        <img src="{{item.image.Array_Img}}" width="100">
       </div>
-      <div class="my-auto">
-        <h6>Thái Học</h6>
-        <p class="mb-2">Đây là logo của HTML 5</p>
-        <div>
-          <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 6
-          <i class="fa fa-comment-o" aria-hidden="true"></i> 8
-        </div>
-      </div>
-    </div>
-    <div class="w-100 d-flex mt-3">
-      <div>
-        <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936060/CodingClub/html_xqnr53.png" width="100">
-      </div>
-      <div class="my-auto">
-        <h6>Thái Học</h6>
-        <p class="mb-2">Đây là logo của HTML 5</p>
-        <div>
-          <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 6
-          <i class="fa fa-comment-o" aria-hidden="true"></i> 8
-        </div>
-      </div>
-    </div>
-    <div class="w-100 d-flex mt-3">
-      <div>
-        <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936060/CodingClub/html_xqnr53.png" width="100">
-      </div>
-      <div class="my-auto">
-        <h6>Thái Học</h6>
-        <p class="mb-2">Đây là logo của HTML 5  </p>
-        <div>
-          <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 6
-          <i class="fa fa-comment-o" aria-hidden="true"></i> 8
-        </div>
-      </div>
-    </div>
-    <div class="w-100 d-flex mt-3">
-      <div>
-        <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936060/CodingClub/html_xqnr53.png" width="100">
-      </div>
-      <div class="my-auto ">
-        <h6>Thái Học</h6>
-        <p class="mb-2">Đây là logo của HTML 5</p>
+      <div class="my-auto mx-3">
+        <h6>{{item.username}}</h6>
+        <p class="mb-2">{{item.status}}</p>
         <div>
           <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 6
           <i class="fa fa-comment-o" aria-hidden="true"></i> 8

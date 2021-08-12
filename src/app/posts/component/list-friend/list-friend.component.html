@@ -3,11 +3,11 @@
     <div>
       <h6 class="text-uppercase">List friend</h6>
     </div>
-    <div class="d-flex mt-3">
+    <div class="d-flex mt-3" *ngFor="let itemUser of listAllUser">
       <div>
-        <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936061/CodingClub/javascript_bombvn.png" width="50">
+        <img src="{{itemUser.avatar}}" width="50" height="50" style="border-radius: 100px">
       </div>
-      <p class="mx-3 my-auto h-100 fw-bolder">Thai Hoc</p>
+      <p class="mx-3 my-auto h-100 fw-bolder">{{itemUser.username}}</p>
       <div class="my-auto">
         <i class="fa fa-circle my-auto text-info" aria-hidden="true"></i>
       </div>

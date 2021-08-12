@@ -63,4 +63,10 @@ export class PostsService {
     const path = `${apiUrl}/api/post/comments/${id}`;
     return this.apiService.deleteBody(path, bodyComments);
   }
+  getTrendingPosts(): Observable<any>{
+    const path = `${apiUrl}/api/posts/likes/trending`;
+    return this.apiService.get(path).pipe(
+      map(response => response.body)
+    );
+  }
 }
