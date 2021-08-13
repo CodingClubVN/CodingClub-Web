@@ -1,0 +1,36 @@
+.img {
+  width: 200px;
+  height: 200px;
+  border: 7px solid rgba(0,0,0,0.3);
+  border-radius: 50%;
+}
+.card-member {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transform: scale(1);
+  transition: all 0.5s;
+}
+.card-member:hover {
+  border-radius: 20px;
+  transform: scale(1.1);
+}
+.icon {
+  width: 30px;
+  height: 30px;
+  margin-left: 25px;
+  border-radius: 50%;
+  transform: scale(1);
+  transition: all 0.5s;
+}
+.icon:hover {
+  transform: scale(1.5);
+}
+.text {
+  transform: scale(1);
+  transition: all 0.5s;
+}
+.text:hover{
+  transform: scale(1.1);
+}
