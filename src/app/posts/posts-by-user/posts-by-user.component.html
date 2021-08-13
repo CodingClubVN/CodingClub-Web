@@ -1,29 +1,121 @@
 <div class="container-fluid">
-  <div *ngFor="let item of sortData" class="w-75 mx-auto mt-3 mb-5 px-4 py-5" style="background-color: #EDEAFF; border-radius: 10px">
-    <div class="d-flex text-start">
-      <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936061/CodingClub/javascript_bombvn.png" width="50">
-      <div class="mx-3">
-        <a routerLink="/posts/new/{{item.username}}" class="text-decoration-none text-dark">
-          <p class="fw-bold my-1">{{item.username}}</p>
+  <div *ngFor="let itemPosts of postsByUser;  let i = index" class="content-post mx-auto mt-3 mb-5 px-4 py-5" style="background-color: #EDEAFF; border-radius: 10px">
+    <div class="row w-100 text-start">
+      <a routerLink="/posts/new/{{itemPosts.username}}" class="col-2 col-md-2 col-lg-1">
+        <img src="{{itemPosts?.avatar}}" width="50" height="50" style="border-radius: 100px">
+      </a>
+      <div class="mx-3 col-7 col-md-8 col-lg-9">
+        <a routerLink="/posts/new/{{itemPosts.username}}" class="text-decoration-none text-dark">
+          <p class="fw-bold my-1">{{itemPosts.username}}</p>
         </a>
-        <p class="m-0">{{item.day_post}}</p>
+        <p class="m-0">{{itemPosts.day_post}}</p>
+      </div>
+      <div class="text-end col-1 col-md-2 col-lg-1">
+        <a class=" text-dark" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa fa-cog" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <li><a class="dropdown-item text-light" (click)="deletePosts(itemPosts._id)">Xóa bài viết</a></li>
+        </ul>
       </div>
     </div>
-    <div class="py-4" style="border-bottom: 2px solid black">
-      <p class="fw-bolder text-start">{{item.status}}</p>
+    <div class="py-1" style="border-bottom: 2px solid black">
+      <p class="fw-bolder text-start">{{itemPosts.status}}</p>
       <div class="text-center">
-        <img src="{{item.image.Array_Img}}" style="width: 98%">
+        <img src="{{itemPosts.image?.Array_Img}}" style="width: 98%">
+      </div>
+      <div class="d-flex">
+        <div *ngFor="let like of listLike;" class="text-start mx-2 mt-3 w-auto">
+          <div class="dropdown" *ngIf="like.post_id === itemPosts.post_id">
+            <a class="text-decoration-none text-dark" href="#" role="button" id="dropdownLike" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {{like.array_username.length}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownLike">
+              <li *ngFor="let i of like.array_username;">
+                <a class="dropdown-item text-light" href="#">{{i}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div *ngFor="let comment of listComment" class="text-start mx-1 mt-3 w-auto">
+          <div *ngIf="comment.post_id === itemPosts.post_id">
+            <a (click)="functionRenderComment()">
+              <i class="fa fa-comment-o" aria-hidden="true"></i> {{comment.array_comments.length}}
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="mt-3 row text-center">
-      <div class="col-6 d-flex justify-content-center">
+    <div class="py-2 row text-center m-0" style="border-bottom: 2px solid black;">
+      <div class="col-6 d-flex justify-content-center" (click)="likeEven(itemPosts.post_id)">
         <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936061/CodingClub/like_lqtzrc.png" width="40">
-        <p class="my-auto mx-2">Thích</p>
+        <p class="my-auto mx-2" [class] = "this.checkLike ? 'text-primary' : 'text-dark'">Thích</p>
       </div>
-      <div class="col-6 d-flex justify-content-center">
+      <div class="col-6 d-flex justify-content-center" (click)="functionRenderComment()">
         <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936060/CodingClub/commnet_yxp3us.png" width="40">
         <p class="my-auto mx-2">Bình luận</p>
       </div>
+    </div>
+    <div class="comment mt-3 text-end">
+      <div *ngFor="let comment of listComment" [class] = "this.renderComment ? '' : 'd-none'">
+        <div *ngIf="comment.post_id === itemPosts.post_id">
+          <div *ngFor="let itemComment of comment.array_comments">
+            <div class="d-flex">
+              <div class="col-2 col-md-1 text-start mt-2">
+                <img src="{{itemComment.avatar}}" style="width: 40px !important; height: 40px; border-radius: 50px">
+              </div>
+              <div class="comment-content mt-2">
+                <p class="m-0 text-start fw-bolder text-dark">{{itemComment.username}}</p>
+                <div *ngIf="!this.checkEditComment">
+                  <p class="text-start text-dark">{{itemComment.message}}</p>
+                </div>
+                <form
+                  name="formEditComment"
+                  [formGroup]="infoEditComment"
+                  (ngSubmit)="summitEditComment(comment.post_id, itemComment.id)"
+                  *ngIf="this.checkEditComment && this.idComment === itemComment.id"
+                >
+                  <div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="newMessage"
+                      id="newMessage"
+                      name="newMessage"
+                    >
+                  </div>
+                </form>
+              </div>
+              <div class="dropdown mx-2 my-auto">
+                <a class="" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item text-light" (click)="deleteComments(comment.post_id,itemComment.id)">Xóa Bình Luận</a>
+                  <a class="dropdown-item text-light" (click)="editComment(itemComment.id, itemComment.message)">Chỉnh sửa bình luận</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form name="myForm" [formGroup]="infoComment" (ngSubmit)="sendComment(itemPosts.post_id)" class="w-100">
+        <div class="row reg-form form-group mt-4 d-flex">
+          <div class="col-2 col-md-1 text-start">
+            <img src="{{this.user?.imgAvatar}}" style="width: 40px !important; height: 40px; border-radius: 100px">
+          </div>
+          <div class="col-10 col-md-11 my-auto">
+            <input
+              class="form-control"
+              type = "text"
+              name="status"
+              formControlName="status"
+              placeholder="Bình luận ..."
+              required
+              id="status">
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

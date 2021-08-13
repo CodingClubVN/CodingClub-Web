@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from '../../services/auth/token-storage.service';
 import { AuthService } from '../../services/auth/auth.service';
+import {UserService} from '../../services/user/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,13 +10,18 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class NavbarComponent implements OnInit {
   islogins = false;
+  user: any;
+  username: any;
   constructor( private tokenStorageService: TokenStorageService,
-               private authService: AuthService) { }
+               private authService: AuthService,
+               private userService: UserService) {
+    this.username = this.tokenStorageService.getUsername();
+  }
 
   ngOnInit(): void {
     this.addClass();
     this.checkLogin();
-    console.log(this.islogins);
+    this.getUser(this.username);
   }
   addClass(): void{
     // tslint:disable-next-line:only-arrow-functions typedef
@@ -44,5 +50,16 @@ export class NavbarComponent implements OnInit {
       }
     );
     this.tokenStorageService.signOut();
+  }
+  getUser(username: string): void{
+    this.userService.getUserByUsername(username).subscribe(
+      res => {
+        this.user = res;
+        console.log(this.user);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

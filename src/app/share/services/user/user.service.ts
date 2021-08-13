@@ -14,7 +14,9 @@ export class UserService {
   constructor( private apiService: ApiService) { }
   getUserByUsername(username: any): Observable<any>{
     const path = `${apiUrl}/api/users/${username}`;
-    return this.apiService.get(path);
+    return this.apiService.get(path).pipe(
+      map(res => res.body)
+    );
   }
   putUserByUsername(username: any, info: any): Observable<any>{
     const path = `${apiUrl}/api/users/${username}`;

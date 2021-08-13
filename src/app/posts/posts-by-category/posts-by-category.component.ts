@@ -1,22 +1,21 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { PostsService } from '../../share/services/posts/posts.service';
+import {PostsService} from '../../share/services/posts/posts.service';
 import {TokenStorageService} from '../../share/services/auth/token-storage.service';
 import {FormBuilder, FormControl} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../../share/services/user/user.service';
 
 @Component({
-  selector: 'app-posts-by-user',
-  templateUrl: './posts-by-user.component.html',
-  styleUrls: ['./posts-by-user.component.scss']
+  selector: 'app-posts-by-category',
+  templateUrl: './posts-by-category.component.html',
+  styleUrls: ['./posts-by-category.component.scss']
 })
-export class PostsByUserComponent implements OnInit {
-  username: any;
-  paramUseranme: any;
-  postsByUser: any = [];
+export class PostsByCategoryComponent implements OnInit {
+  listsPostByCategory: any;
   listLike: any = [];
   idPost: any;
   checkLike = false;
+  username: any;
   infoComment: any;
   listComment: any = [];
   commentLenght: any;
@@ -24,7 +23,8 @@ export class PostsByUserComponent implements OnInit {
   checkEditComment = false;
   infoEditComment: any;
   idComment: any;
-  user: any;
+  theme: any;
+  user: any
   @Input() userDetailNewPosts: any;
   constructor(private postsService: PostsService,
               private tokenStorageService: TokenStorageService,
@@ -36,12 +36,12 @@ export class PostsByUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
-      this.paramUseranme = params.get('user');
+      this.theme = params.get('category');
     });
-    console.log(this.paramUseranme);
+    console.log(this.theme);
     this.initForm();
     this.initFormEditComment();
-    this.loadData(this.paramUseranme);
+    this.loadData(this.theme);
     this.getUser(this.username);
   }
   initForm(): void{
@@ -50,12 +50,12 @@ export class PostsByUserComponent implements OnInit {
     });
   }
   // start Render data
-  loadData(user: any): void{
-    this.postsService.getPostsByUser(user).subscribe(
+  loadData(themeData: any): void{
+    this.postsService.getByCategory(themeData).subscribe(
       res => {
-        this.postsByUser = res;
-        console.log(this.postsByUser);
-        this.postsByUser.forEach((item: { post_id: any; }) => {
+        this.listsPostByCategory = res;
+        console.log(this.listsPostByCategory);
+        this.listsPostByCategory.forEach((item: { post_id: any; }) => {
           this.getLikeByPosts(item.post_id);
           this.getCommentByID(item.post_id);
         });
@@ -118,7 +118,7 @@ export class PostsByUserComponent implements OnInit {
           this.checkLike = true;
           this.listLike = [];
           this.listComment = [];
-          this.loadData(this.paramUseranme);
+          this.loadData(this.theme);
           console.log(res);
         },
         error => {
@@ -131,7 +131,7 @@ export class PostsByUserComponent implements OnInit {
           this.checkLike = false;
           this.listLike = [];
           this.listComment = [];
-          this.loadData(this.paramUseranme);
+          this.loadData(this.theme);
           console.log(res);
         },
         error => {
@@ -154,7 +154,7 @@ export class PostsByUserComponent implements OnInit {
     return this.infoComment.controls;
   }
   sortData(): void {
-    return this.postsByUser.sort((a: { day_post: string | number | Date; }, b: { day_post: string | number | Date; }) => {
+    return this.listsPostByCategory.sort((a: { day_post: string | number | Date; }, b: { day_post: string | number | Date; }) => {
       return (new Date(b.day_post) as any) - (new Date(a.day_post) as any);
     });
   }
@@ -167,7 +167,7 @@ export class PostsByUserComponent implements OnInit {
       res => {
         this.listLike = [];
         this.listComment = [];
-        this.loadData(this.paramUseranme);
+        this.loadData(this.theme);
         this.f.status.value = '';
       },
       error => {
@@ -197,7 +197,7 @@ export class PostsByUserComponent implements OnInit {
       res => {
         this.listLike = [];
         this.listComment = [];
-        this.loadData(this.paramUseranme);
+        this.loadData(this.theme);
       },
       error => {
         console.log(error);
@@ -218,7 +218,7 @@ export class PostsByUserComponent implements OnInit {
       res => {
         this.listLike = [];
         this.listComment = [];
-        this.loadData(this.paramUseranme);
+        this.loadData(this.theme);
         this.checkEditComment = false;
       },
       error => {

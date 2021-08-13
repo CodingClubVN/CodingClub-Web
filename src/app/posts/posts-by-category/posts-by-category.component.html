@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div *ngFor="let itemPosts of posts;  let i = index" class="content-post mx-auto mt-3 mb-5 px-4 py-5" style="background-color: #EDEAFF; border-radius: 10px">
+  <div *ngFor="let itemPosts of listsPostByCategory;  let i = index" class="content-post mx-auto mt-3 mb-5 px-4 py-5" style="background-color: #EDEAFF; border-radius: 10px">
     <div class="row w-100 text-start">
       <a routerLink="/posts/new/{{itemPosts.username}}" class="col-2 col-md-2 col-lg-1">
         <img src="{{itemPosts?.avatar}}" width="50" height="50" style="border-radius: 100px">
@@ -102,7 +102,7 @@
       <form name="myForm" [formGroup]="infoComment" (ngSubmit)="sendComment(itemPosts.post_id)" class="w-100">
         <div class="row reg-form form-group mt-4 d-flex">
           <div class="col-2 col-md-1 text-start">
-            <img src="{{this.user?.imgAvatar}}" style="width: 40px !important; height: 40px; border-radius: 100px ">
+            <img src="{{this.user?.imgAvatar}}" style="width: 40px !important; height: 40px; border-radius: 100px">
           </div>
           <div class="col-10 col-md-11 my-auto">
             <input

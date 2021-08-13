@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from '../share/services/user/user.service';
+import {TokenStorageService} from '../share/services/auth/token-storage.service';
 
 @Component({
   selector: 'app-posts',
@@ -6,11 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit {
-
-  constructor() { }
+  username: any;
+  user: any;
+  constructor(private userService: UserService,
+              private tokenStorageService: TokenStorageService) {
+    this.username = this.tokenStorageService.getUsername();
+  }
 
   ngOnInit(): void {
-    this.addClass()
+    this.getUser(this.username);
+    this.addClass();
   }
   addClass(): void{
     // tslint:disable-next-line:only-arrow-functions typedef
@@ -19,5 +26,16 @@ export class PostsComponent implements OnInit {
       // @ts-ignore
       nav.classList.toggle('sticky', window.scrollY > 100);
     });
+  }
+  getUser(username: string): void{
+    this.userService.getUserByUsername(username).subscribe(
+      res => {
+        this.user = res;
+        console.log(this.user);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

@@ -42,7 +42,7 @@ export class PersonalInformationComponent implements OnInit {
   getUser(username: any): void{
     this.userService.getUserByUsername(username).subscribe(
       res => {
-        this.personalInformation = res.body;
+        this.personalInformation = res;
         console.log(this.personalInformation);
         this.infoUser.get('lastname').setValue(this.personalInformation.lastname);
         this.infoUser.get('firstname').setValue(this.personalInformation.firstname);

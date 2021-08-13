@@ -70,6 +70,10 @@ export class CategoryComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.addClass()
+    this.addClass();
+  }
+
+  filterCategory(category: string): void{
+    alert(category);
   }
 }

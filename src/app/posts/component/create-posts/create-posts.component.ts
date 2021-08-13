@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { TokenStorageService } from '../../../share/services/auth/token-storage.service';
 import {PostsService} from '../../../share/services/posts/posts.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
@@ -14,6 +14,7 @@ export class CreatePostsComponent implements OnInit {
   selectedFile: any = null;
   token: any = this.tokenStorageService.getToken();
   infoPosts: any;
+  @Input() userDetailCreatePosts: any;
   constructor( private tokenStorageService: TokenStorageService,
                private postsService: PostsService,
                private formBuilder: FormBuilder,

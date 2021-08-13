@@ -24,7 +24,9 @@ export class PostsService {
   }
   getPostsByUser(user: any): Observable<any>{
     const path = `${apiUrl}/api/posts/${user}`;
-    return this.apiService.get(path);
+    return this.apiService.get(path).pipe(
+      map(response => response.body)
+    );
   }
   deletePosts(id: any): Observable<any>{
     const path = `${apiUrl}/api/posts/${id}`;
@@ -67,6 +69,12 @@ export class PostsService {
     const path = `${apiUrl}/api/posts/likes/trending`;
     return this.apiService.get(path).pipe(
       map(response => response.body)
+    );
+  }
+  getByCategory(theme: any): Observable<any>{
+    const path = `${apiUrl}/api/posts/theme/${theme}`;
+    return this.apiService.get(path).pipe(
+      map(res => res.body)
     );
   }
 }

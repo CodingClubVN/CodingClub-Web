@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {PostsComponent} from './posts.component';
 import {PostsByUserComponent} from './posts-by-user/posts-by-user.component';
 import {NewPostsComponent} from './component/new-posts/new-posts.component';
+import {PostsByCategoryComponent} from './posts-by-category/posts-by-category.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
         {
           path: 'new/:user',
           component: PostsByUserComponent
+        },
+        {
+          path: 'new/theme/:category',
+          component: PostsByCategoryComponent
         }
       ]
   }

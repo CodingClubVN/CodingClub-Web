@@ -35,8 +35,8 @@
         <li class="nav-item mx-lg-1">
           <a class="nav-link" routerLink="/user" *ngIf="islogins">
             <div class="d-flex">
-              <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936061/CodingClub/javascript_bombvn.png" width="40" style="border-radius: 50px">
-              <p class="my-auto mx-2 fw-bolder text-dark">Thái Học</p>
+              <img src="{{this.user?.imgAvatar}}" width="40" height="40" style="border-radius: 50px">
+              <p class="my-auto mx-2 fw-bolder text-dark">{{this.user?.username}}</p>
             </div>
           </a>
         </li>
