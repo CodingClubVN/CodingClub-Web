@@ -99,7 +99,7 @@
           </div>
         </div>
       </div>
-      <form name="myForm" [formGroup]="infoComment" (ngSubmit)="sendComment(itemPosts.post_id)" class="w-100">
+      <form name="myForm" [formGroup]="infoComment" (ngSubmit)="sendComment(itemPosts.post_id)" class="w-100" *ngIf="this.checkLogin$">
         <div class="row reg-form form-group mt-4 d-flex">
           <div class="col-2 col-md-1 text-start">
             <img src="{{this.user?.imgAvatar}}" style="width: 40px !important; height: 40px; border-radius: 100px">

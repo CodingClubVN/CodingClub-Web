@@ -3,6 +3,7 @@ import { PostsService } from '../../../share/services/posts/posts.service';
 import {TokenStorageService} from '../../../share/services/auth/token-storage.service';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {UserService} from '../../../share/services/user/user.service';
+import {AuthService} from '../../../share/services/auth/auth.service';
 
 @Component({
   selector: 'app-new-posts',
@@ -23,11 +24,13 @@ export class NewPostsComponent implements OnInit {
   infoEditComment: any;
   idComment: any;
   user: any;
+  checkLogin$: any;
   @Input() userDetailNewPosts: any;
   constructor(private postsService: PostsService,
               private tokenStorageService: TokenStorageService,
               private formBuilder: FormBuilder,
-              private userService: UserService) {
+              private userService: UserService,
+              private authService: AuthService) {
     this.username = this.tokenStorageService.getUsername();
   }
 
@@ -36,6 +39,7 @@ export class NewPostsComponent implements OnInit {
     this.initFormEditComment();
     this.loadData();
     this.getUser(this.username);
+    this.checkLogin();
   }
   initForm(): void{
     this.infoComment = this.formBuilder.group({
@@ -230,5 +234,9 @@ export class NewPostsComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  checkLogin(): void{
+    // @ts-ignore
+    this.checkLogin$ = this.authService.isLogiedIn() ? true : false;
   }
 }

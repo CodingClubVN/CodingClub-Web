@@ -4,6 +4,7 @@ import {TokenStorageService} from '../../share/services/auth/token-storage.servi
 import {FormBuilder, FormControl} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../../share/services/user/user.service';
+import {AuthService} from '../../share/services/auth/auth.service';
 
 @Component({
   selector: 'app-posts-by-category',
@@ -24,13 +25,15 @@ export class PostsByCategoryComponent implements OnInit {
   infoEditComment: any;
   idComment: any;
   theme: any;
-  user: any
+  user: any;
   @Input() userDetailNewPosts: any;
+  checkLogin$: any;
   constructor(private postsService: PostsService,
               private tokenStorageService: TokenStorageService,
               private formBuilder: FormBuilder,
               private activatedRoute: ActivatedRoute,
-              private userService: UserService) {
+              private userService: UserService,
+              private authService: AuthService) {
     this.username = this.tokenStorageService.getUsername();
   }
 
@@ -43,6 +46,7 @@ export class PostsByCategoryComponent implements OnInit {
     this.initFormEditComment();
     this.loadData(this.theme);
     this.getUser(this.username);
+    this.checkLogin();
   }
   initForm(): void{
     this.infoComment = this.formBuilder.group({
@@ -237,5 +241,9 @@ export class PostsByCategoryComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  checkLogin(): void{
+    // @ts-ignore
+    this.checkLogin$ = this.authService.isLogiedIn() ? true : false;
   }
 }

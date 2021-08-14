@@ -25,7 +25,7 @@
         <img src="{{itemPosts.image?.Array_Img}}" style="width: 98%">
       </div>
       <div class="d-flex">
-        <div *ngFor="let like of listLike;" class="text-start mx-2 mt-3 w-auto">
+        <div *ngFor="let like of listLike;" class="text-start m-0 mt-3 w-auto">
           <div class="dropdown" *ngIf="like.post_id === itemPosts.post_id">
             <a class="text-decoration-none text-dark" href="#" role="button" id="dropdownLike" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {{like.array_username.length}}
@@ -37,11 +37,13 @@
             </ul>
           </div>
         </div>
-        <div *ngFor="let comment of listComment" class="text-start mx-1 mt-3 w-auto">
-          <div *ngIf="comment.post_id === itemPosts.post_id">
-            <a (click)="functionRenderComment()">
-              <i class="fa fa-comment-o" aria-hidden="true"></i> {{comment.array_comments.length}}
-            </a>
+        <div class="mx-3">
+          <div *ngFor="let comment of listComment" class="text-start m-0 mt-3 w-auto">
+            <div *ngIf="comment.post_id === itemPosts.post_id">
+              <a (click)="functionRenderComment()">
+                <i class="fa fa-comment-o" aria-hidden="true"></i> {{comment.array_comments.length}}
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -99,7 +101,7 @@
           </div>
         </div>
       </div>
-      <form name="myForm" [formGroup]="infoComment" (ngSubmit)="sendComment(itemPosts.post_id)" class="w-100">
+      <form name="myForm" [formGroup]="infoComment" (ngSubmit)="sendComment(itemPosts.post_id)" class="w-100" *ngIf="this.checkLogin$">
         <div class="row reg-form form-group mt-4 d-flex">
           <div class="col-2 col-md-1 text-start">
             <img src="{{this.user?.imgAvatar}}" style="width: 40px !important; height: 40px; border-radius: 100px ">
