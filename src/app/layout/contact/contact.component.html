@@ -3,17 +3,20 @@
     <div class="row contact" >
       <div class="col-12 col-sm-12 col-md-12 col-xl-6 text-center form">
         <p class="title h3 text-dark">Contact Us</p>
-        <form>
+        <form [formGroup]="restForm">
           <div class="form-group">
-            <input type="text" name="name" class="form-control"  placeholder="Name">
+            <input formControlName="name" type="text" name="name" class="form-control"  placeholder="Name" (input)="checkRegExp()">
+            <span class="text-err h6">{{errName}}</span>
           </div>
           <div class="form-group">
-            <input type="email" name="email" class="form-control"  placeholder="Email">
+            <input formControlName="email" type="email" name="email" class="form-control"  placeholder="Email" (input)="checkRegExp()">
+            <span class="text-err h6">{{errEmail}}</span>
           </div>
           <div class="form-group">
-            <textarea class="form-control" name="Message" rows="5" placeholder="Message"></textarea>
+            <textarea formControlName="message" class="form-control" name="Message" rows="5" placeholder="Message" (input)="checkRegExp()"></textarea>
+            <span class="text-err h6">{{errMessage}}</span>
           </div>
-          <button type="submit" class="btn btn-dark button">Send</button>
+          <button type="submit" class="btn btn-dark button" data-toggle="modal" data-target="#exampleModalCenter" (click)="checkRegExp();checkData()">Send</button>
         </form>
       </div>
       <div class="col-12 col-sm-12 col-md-6 col-xl-3" style="margin-top: 100px">
@@ -27,3 +30,27 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" *ngIf="err">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-white text-center" style="background-color: #6C757D">
+        <h5 class="modal-title" id="exampleModalLongTitle">Bạn có chắc muốn gửi tin này đến chúng tôi?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Name: {{restForm.value.name}}</p><br>
+        <p>Email: {{restForm.value.email}}</p><br>
+        <p>Message: {{restForm.value.message}}</p><br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success" (click)="checkData();onSubmit(err)">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
