@@ -5,11 +5,11 @@ import {PostsComponent} from './posts/posts.component';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule)
+    loadChildren: () => import('./posts/posts.module').then(m => m.PostsModule)
   },
   {
-    path: 'posts',
-    loadChildren: () => import('./posts/posts.module').then(m => m.PostsModule)
+    path: 'home',
+    loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule)
   },
   {
     path: 'user',

@@ -19,10 +19,6 @@ const routes: Routes = [
         redirectTo: 'home'
       },
       {
-        path: 'home',
-        component: HomeComponent
-      },
-      {
         path: 'upload',
         component: UploadImgComponent
       },
