@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../share/services/user/user.service';
 import {TokenStorageService} from '../share/services/auth/token-storage.service';
+import {Observable} from 'rxjs';
+import {PostsService} from '../share/services/posts/posts.service';
 
 @Component({
   selector: 'app-posts',
@@ -10,9 +12,12 @@ import {TokenStorageService} from '../share/services/auth/token-storage.service'
 export class PostsComponent implements OnInit {
   username: any;
   user: any;
+  isLoading$: Observable<boolean>;
   constructor(private userService: UserService,
-              private tokenStorageService: TokenStorageService) {
+              private tokenStorageService: TokenStorageService,
+              private postsService: PostsService) {
     this.username = this.tokenStorageService.getUsername();
+    this.isLoading$ = this.postsService.isLoadingSubject.asObservable();
   }
 
   ngOnInit(): void {

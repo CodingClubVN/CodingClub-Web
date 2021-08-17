@@ -10,3 +10,8 @@
     <app-list-friend></app-list-friend>
   </div>
 </div>
+<div class="bg-loanding d-flex justify-content-center" *ngIf="this.isLoading$ | async">
+  <div class="loading spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>

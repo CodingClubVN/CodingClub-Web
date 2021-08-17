@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../share/services/user/user.service';
 import {TokenStorageService} from '../../share/services/auth/token-storage.service';
 import {FormControl, Validators, FormBuilder} from '@angular/forms';
+import {PostsService} from '../../share/services/posts/posts.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-personal-information',
@@ -17,7 +19,9 @@ export class PersonalInformationComponent implements OnInit {
   checkTagetImg = false;
   constructor(private userService: UserService,
               private tokenStorageService: TokenStorageService,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private postsService: PostsService,
+              private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.infoUser = this.formBuilder.group({
@@ -68,6 +72,7 @@ export class PersonalInformationComponent implements OnInit {
     }
   }
   onSubmit(): void{
+    this.postsService.isLoadingSubject.next(true);
     const fd: any  = new FormData();
     if (this.personalInformation.lastname !== this.infoUser.get('lastname').value){
       fd.append('lastname', this.infoUser.get('lastname').value);
@@ -89,10 +94,14 @@ export class PersonalInformationComponent implements OnInit {
     }
     this.userService.putUserByUsername(this.username, fd).subscribe(
       res => {
+        this.postsService.isLoadingSubject.next(false);
+        this.toastrService.success('Thay đổi thông tin thành công', 'Thông báo !')
         console.log(res);
         this.reload();
       },
       error => {
+        this.postsService.isLoadingSubject.next(false);
+        this.toastrService.error('Thay đổi thông tin thất bại vui lòng thử lại', 'Thông báo !')
         console.log(error);
       }
     );

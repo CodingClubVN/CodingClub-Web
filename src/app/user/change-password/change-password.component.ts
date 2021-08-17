@@ -4,6 +4,8 @@ import { AuthService } from '../../share/services/auth/auth.service';
 import { TokenStorageService } from '../../share/services/auth/token-storage.service';
 import { Router } from '@angular/router';
 import {UserService} from '../../share/services/user/user.service';
+import {PostsService} from '../../share/services/posts/posts.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-change-password',
@@ -19,7 +21,9 @@ export class ChangePasswordComponent implements OnInit {
   constructor( private formBuilder: FormBuilder,
                private authService: AuthService,
                private tokenStorageService: TokenStorageService,
-               private userService: UserService) {
+               private userService: UserService,
+               private postsService: PostsService,
+               private toastrService: ToastrService) {
     this.username = this.tokenStorageService.getUsername();
   }
 
@@ -57,6 +61,7 @@ export class ChangePasswordComponent implements OnInit {
   }
   onSubmit(): void{
     this.submitted = true;
+    this.postsService.isLoadingSubject.next(true);
     if (this.f.newpassword.value === this.f.confirmnewpassword.value){
       const infochange = {
         newPassword: this.f.newpassword.value,
@@ -64,9 +69,13 @@ export class ChangePasswordComponent implements OnInit {
       };
       console.log(infochange);
       this.authService.changePassword(infochange).subscribe(res => {
+          this.postsService.isLoadingSubject.next(false);
+          this.toastrService.success('Đổi mật khẩu thành công', 'Thông báo !');
           console.log(res);
         },
         error => {
+          this.toastrService.error('Đổi mật khẩu thất bại vui lòng thử lại', 'Thông báo !');
+          this.postsService.isLoadingSubject.next(false);
           console.log(error);
         });
     }else{

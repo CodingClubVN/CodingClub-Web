@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../core/_core.service';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LikeModel} from '../../model/like/like.model';
@@ -12,8 +12,13 @@ const apiUrl = `${environment.apiUrl}`;
 })
 
 export class PostsService {
+  isLoadingSubject: BehaviorSubject<boolean>;
+  isLoading$: Observable<boolean>;
   constructor(private apiService: ApiService,
-              private httpClient: HttpClient) { }
+              private httpClient: HttpClient) {
+    this.isLoadingSubject = new BehaviorSubject<boolean>(false);
+    this.isLoading$ = this.isLoadingSubject.asObservable();
+  }
   createPosts(formData: any): Observable<any>{
     const path = `${apiUrl}/api/posts`;
     return this.apiService.postFormData(path, formData);

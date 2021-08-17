@@ -4,6 +4,7 @@ import {TokenStorageService} from '../../../share/services/auth/token-storage.se
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {UserService} from '../../../share/services/user/user.service';
 import {AuthService} from '../../../share/services/auth/auth.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-new-posts',
@@ -30,7 +31,8 @@ export class NewPostsComponent implements OnInit {
               private tokenStorageService: TokenStorageService,
               private formBuilder: FormBuilder,
               private userService: UserService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private toastrService: ToastrService) {
     this.username = this.tokenStorageService.getUsername();
   }
 
@@ -66,11 +68,16 @@ export class NewPostsComponent implements OnInit {
   // end Render data
   // start handle delete post
   deletePosts(id: any): void{
+    this.postsService.isLoadingSubject.next(true);
     this.postsService.deletePosts(id).subscribe(
       res => {
+        this.postsService.isLoadingSubject.next(false);
+        this.toastrService.success('Xóa bài viết thành công', 'Thông báo !');
         window.location.reload();
       },
       error => {
+        this.postsService.isLoadingSubject.next(false);
+        this.toastrService.error('Xóa bài viết thất bại', 'Thông báo !');
         console.log(error);
       }
     );
@@ -187,11 +194,13 @@ export class NewPostsComponent implements OnInit {
     this.renderComment = true;
   }
   deleteComments(postsID: any, idComment: any): void{
+    this.postsService.isLoadingSubject.next(true);
     const dataDelete = {
       id: idComment
     };
     this.postsService.deleteComment(postsID, dataDelete).subscribe(
       res => {
+        this.postsService.isLoadingSubject.next(false);
         this.listLike = [];
         this.listComment = [];
         this.loadData();
@@ -207,12 +216,14 @@ export class NewPostsComponent implements OnInit {
     this.formEdit.newMessage.value = message;
   }
   summitEditComment(postsID: any, idComment: any): void{
+    this.postsService.isLoadingSubject.next(true);
     const dataEditComment = {
       id: idComment,
       newMessage: this.formEdit.newMessage.value
     };
     this.postsService.putComments(postsID, dataEditComment).subscribe(
       res => {
+        this.postsService.isLoadingSubject.next(false);
         this.listLike = [];
         this.listComment = [];
         this.loadData();

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators} from '@angular/forms';
 import { AuthService } from '../../share/services/auth/auth.service';
 import { TokenStorageService } from '../../share/services/auth/token-storage.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor( private formBuilder: FormBuilder,
                private authService: AuthService,
-               private tokenStorageService: TokenStorageService) { }
+               private tokenStorageService: TokenStorageService,
+               private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.infoUser = this.formBuilder.group({
@@ -31,16 +33,12 @@ export class LoginComponent implements OnInit {
         ])
     });
   }
-
-  // tslint:disable-next-line:typedef
   get f() {
     return this.infoUser.controls;
   }
-  // tslint:disable-next-line:typedef
   get username() {
     return this.infoUser.get('username');
   }
-  // tslint:disable-next-line:typedef
   get password() {
     return this.infoUser.get('password');
   }
@@ -55,6 +53,7 @@ export class LoginComponent implements OnInit {
       },
       err => {
         console.log(err);
+        this.toastrService.error('Đăng nhập thất bại vui lòng thử lại !', 'Lỗi !!!');
       }
     );
   }

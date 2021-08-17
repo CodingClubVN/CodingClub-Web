@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable} from 'rxjs';
+import {PostsService} from '../share/services/posts/posts.service';
 
 @Component({
   selector: 'app-user',
@@ -6,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
+  isLoading$: Observable<boolean>;
 
-  constructor() { }
+  constructor(private postsService: PostsService) {
+    this.isLoading$ = this.postsService.isLoadingSubject.asObservable();
+  }
 
   ngOnInit(): void {
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { AuthService } from '../../share/services/auth/auth.service';
 import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,8 @@ export class RegisterComponent implements OnInit {
 
   constructor( private formBuilder: FormBuilder,
                private authService: AuthService,
-               private router: Router) { }
+               private router: Router,
+               private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.infoUser = this.formBuilder.group({
@@ -113,9 +115,11 @@ export class RegisterComponent implements OnInit {
         res => {
           console.log(res);
           this.router.navigate(['/login']);
+          this.toastrService.success('Đăng ký thành công !', 'Thông báo');
         },
         error => {
           console.log(error);
+          this.toastrService.error('Đăng ký tài khoản thất bại vui lòng thử lại !', 'Lỗi !!!');
         }
       );
     }else{
