@@ -40,3 +40,13 @@ li{
   }
 }
 
+.category::-webkit-scrollbar {
+  display: none;
+}
+
+.category {
+  overflow: auto;
+  height: 75vh;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

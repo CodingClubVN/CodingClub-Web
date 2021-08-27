@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div *ngFor="let itemPosts of posts;  let i = index" class="content-post mx-auto mt-3 mb-5 px-3 py-3" style="background-color: #EDEAFF; border-radius: 10px">
+  <div *ngFor="let itemPosts of posts;  let i = index" class="content-post mx-auto my-3 px-3 py-3" style="background-color: #EDEAFF; border-radius: 10px">
     <div class="w-100 text-start d-flex justify-content-between">
       <a routerLink="/new/{{itemPosts.username}}">
         <img src="{{itemPosts?.avatar}}" width="50" height="50" style="border-radius: 100px">
@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="pt-2 pb-1 border-bottom border-secondary">
-      <p class="fw-bolder text-start">{{itemPosts.status}}</p>
+      <p class="fw-bolder text-start" style="overflow-wrap: break-word;">{{itemPosts.status}}</p>
       <div class="text-center">
         <img src="{{itemPosts.image?.Array_Img}}" style="width: 98%">
       </div>

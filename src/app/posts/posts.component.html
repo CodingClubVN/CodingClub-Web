@@ -1,11 +1,11 @@
 <app-navbar></app-navbar>
 <div class="row m-0 p-0">
-  <app-category class="col-md-3"></app-category>
+  <app-category class="col-md-3 p-0"></app-category>
   <div class="col-md-6 text-center justify-content-center">
     <app-create-posts class="justify-content-center" [userDetailCreatePosts] = "user"></app-create-posts>
     <router-outlet></router-outlet>
   </div>
-  <div class="section-right col-md-3 p-0">
+  <div class="section-right col-md-3 p-0 pe-3">
     <app-trending-post></app-trending-post>
     <app-list-friend></app-list-friend>
   </div>
