@@ -5,9 +5,6 @@
       <h6 class="mx-1">Top trending</h6>
     </div>
     <div class="w-100 d-flex mt-3 pb-2" *ngFor="let item of listTrendingPosts" style="border-bottom: 1px solid black">
-      <div>
-        <img src="{{item.image}}" width="100">
-      </div>
       <div class="my-auto w-100">
         <h6>{{item.username}}</h6>
         <p class="mb-2" style="overflow-wrap: break-word;">{{item.status}}</p>

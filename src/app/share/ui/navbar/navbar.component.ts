@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { TokenStorageService } from '../../services/auth/token-storage.service';
 import { AuthService } from '../../services/auth/auth.service';
 import {UserService} from '../../services/user/user.service';
@@ -9,6 +9,7 @@ import {UserService} from '../../services/user/user.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  search: string = '';
   islogins = false;
   user: any;
   username: any;

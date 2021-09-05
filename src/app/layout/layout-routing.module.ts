@@ -8,6 +8,7 @@ import {RegisterComponent} from './register/register.component';
 import {AuthGuard} from '../share/services/auth/guards/auth.guard';
 import {ContactComponent} from './contact/contact.component';
 import {AboutUsComponent} from './about-us/about-us.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'about',
         component: AboutUsComponent
+      },
+      {
+        path: 'search',
+        component: SearchComponent  
       }
     ]
   }

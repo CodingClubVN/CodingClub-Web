@@ -10,6 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ContactComponent } from './contact/contact.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
     RegisterComponent,
     ContactComponent,
     AboutUsComponent,
+    SearchComponent,
   ],
   imports: [
     CommonModule,

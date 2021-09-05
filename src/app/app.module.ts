@@ -12,7 +12,7 @@ import {PostsModule} from './posts/posts.module';
 import { UserComponent } from './user/user.component';
 import {UserModule} from './user/user.module';
 import {ToastNoAnimation, ToastNoAnimationModule, ToastrModule} from 'ngx-toastr';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import {ToastNoAnimation, ToastNoAnimationModule, ToastrModule} from 'ngx-toastr
     ClipboardModule,
     PostsModule,
     UserModule,
+    FormsModule,
     ToastrModule.forRoot({
       timeOut: 2000,
       progressBar: true,

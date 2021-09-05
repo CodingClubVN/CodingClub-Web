@@ -3,6 +3,12 @@ nav{
   height: 70px;
   background-color: #EDEAFF;
 }
+i{
+  font-size: 1.5rem;
+}
+form {
+  height: 35px;
+}
 .title-logo{
   font-size: 24px;
 }
@@ -10,9 +16,18 @@ nav{
   font-size: 2rem;
   font-weight: 1000;
 }
-i{
-  font-size: 1.5rem;
+.input-group {
+  input {
+    height: 35px;
+  }
+  button {
+    height: 35px;
+    i {
+      font-size: 0.75rem;
+    }
+  }
 }
+
 .navbar-nav a{
   font-size: 1.3rem;
   font-weight: 400;
