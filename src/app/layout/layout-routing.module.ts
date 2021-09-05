@@ -5,8 +5,10 @@ import {HomeComponent} from './home/home.component';
 import { UploadImgComponent } from './upload-img/upload-img.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
-import {ChangePasswordComponent} from '../user/change-password/change-password.component';
 import {AuthGuard} from '../share/services/auth/guards/auth.guard';
+import {ContactComponent} from './contact/contact.component';
+import {AboutUsComponent} from './about-us/about-us.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   {
@@ -16,10 +18,6 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'home'
-      },
-      {
-        path: 'home',
-        component: HomeComponent
       },
       {
         path: 'upload',
@@ -33,6 +31,18 @@ const routes: Routes = [
       {
         path: 'register',
         component: RegisterComponent
+      },
+      {
+        path: 'contact',
+        component: ContactComponent
+      },
+      {
+        path: 'about',
+        component: AboutUsComponent
+      },
+      {
+        path: 'search',
+        component: SearchComponent  
       }
     ]
   }

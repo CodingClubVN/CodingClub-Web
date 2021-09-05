@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PostsService } from '../../../share/services/posts/posts.service';
 import {TokenStorageService} from '../../../share/services/auth/token-storage.service';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import {UserService} from '../../../share/services/user/user.service';
+import {AuthService} from '../../../share/services/auth/auth.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-new-posts',
@@ -21,9 +24,15 @@ export class NewPostsComponent implements OnInit {
   checkEditComment = false;
   infoEditComment: any;
   idComment: any;
+  user: any;
+  checkLogin$: any;
+  @Input() userDetailNewPosts: any;
   constructor(private postsService: PostsService,
               private tokenStorageService: TokenStorageService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private userService: UserService,
+              private authService: AuthService,
+              private toastrService: ToastrService) {
     this.username = this.tokenStorageService.getUsername();
   }
 
@@ -31,6 +40,8 @@ export class NewPostsComponent implements OnInit {
     this.initForm();
     this.initFormEditComment();
     this.loadData();
+    this.getUser(this.username);
+    this.checkLogin();
   }
   initForm(): void{
     this.infoComment = this.formBuilder.group({
@@ -42,6 +53,7 @@ export class NewPostsComponent implements OnInit {
     this.postsService.getPosts().subscribe(
       res => {
         this.posts = res.body as string[];
+        console.log(this.posts);
         this.posts.forEach((item: { post_id: any; }) => {
           this.getLikeByPosts(item.post_id);
           this.getCommentByID(item.post_id);
@@ -56,11 +68,16 @@ export class NewPostsComponent implements OnInit {
   // end Render data
   // start handle delete post
   deletePosts(id: any): void{
+    this.postsService.isLoadingSubject.next(true);
     this.postsService.deletePosts(id).subscribe(
       res => {
+        this.postsService.isLoadingSubject.next(false);
+        this.toastrService.success('Xóa bài viết thành công', 'Thông báo !');
         window.location.reload();
       },
       error => {
+        this.postsService.isLoadingSubject.next(false);
+        this.toastrService.error('Xóa bài viết thất bại', 'Thông báo !');
         console.log(error);
       }
     );
@@ -155,7 +172,6 @@ export class NewPostsComponent implements OnInit {
         this.listLike = [];
         this.listComment = [];
         this.loadData();
-        console.log(res);
         this.f.status.value = '';
       },
       error => {
@@ -168,8 +184,6 @@ export class NewPostsComponent implements OnInit {
       res => {
         this.listComment.push(res);
         this.commentLenght = this.listComment.length;
-        console.log(this.listComment);
-        console.log(this.commentLenght);
       },
       error => {
         console.log(error);
@@ -180,12 +194,13 @@ export class NewPostsComponent implements OnInit {
     this.renderComment = true;
   }
   deleteComments(postsID: any, idComment: any): void{
+    this.postsService.isLoadingSubject.next(true);
     const dataDelete = {
       id: idComment
     };
-    console.log(dataDelete);
     this.postsService.deleteComment(postsID, dataDelete).subscribe(
       res => {
+        this.postsService.isLoadingSubject.next(false);
         this.listLike = [];
         this.listComment = [];
         this.loadData();
@@ -201,12 +216,14 @@ export class NewPostsComponent implements OnInit {
     this.formEdit.newMessage.value = message;
   }
   summitEditComment(postsID: any, idComment: any): void{
+    this.postsService.isLoadingSubject.next(true);
     const dataEditComment = {
       id: idComment,
       newMessage: this.formEdit.newMessage.value
     };
     this.postsService.putComments(postsID, dataEditComment).subscribe(
       res => {
+        this.postsService.isLoadingSubject.next(false);
         this.listLike = [];
         this.listComment = [];
         this.loadData();
@@ -215,7 +232,22 @@ export class NewPostsComponent implements OnInit {
       error => {
         console.log(error);
       }
-    )
+    );
   }
   // end handle comment
+  getUser(username: string): void{
+    this.userService.getUserByUsername(username).subscribe(
+      res => {
+        this.user = res;
+        console.log(this.user);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  checkLogin(): void{
+    // @ts-ignore
+    this.checkLogin$ = this.authService.isLogiedIn() ? true : false;
+  }
 }

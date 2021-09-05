@@ -8,6 +8,7 @@ import { ListFriendComponent } from './component/list-friend/list-friend.compone
 import { TrendingPostComponent } from './component/trending-post/trending-post.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { PostsByUserComponent } from './posts-by-user/posts-by-user.component';
+import { PostsByCategoryComponent } from './posts-by-category/posts-by-category.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PostsByUserComponent } from './posts-by-user/posts-by-user.component';
     NewPostsComponent,
     ListFriendComponent,
     TrendingPostComponent,
-    PostsByUserComponent
+    PostsByUserComponent,
+    PostsByCategoryComponent
   ],
   exports: [
     CategoryComponent,

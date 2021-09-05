@@ -11,7 +11,8 @@ import { PostsComponent } from './posts/posts.component';
 import {PostsModule} from './posts/posts.module';
 import { UserComponent } from './user/user.component';
 import {UserModule} from './user/user.module';
-
+import {ToastNoAnimation, ToastNoAnimationModule, ToastrModule} from 'ngx-toastr';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,14 @@ import {UserModule} from './user/user.module';
     HttpClientModule,
     ClipboardModule,
     PostsModule,
-    UserModule
+    UserModule,
+    FormsModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      preventDuplicates: true
+    }),
   ],
   providers: [],
   exports: [

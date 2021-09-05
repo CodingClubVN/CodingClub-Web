@@ -1,20 +1,21 @@
-<div class="container mt-3" *ngIf="isLogins">
-  <div class="content-createPost content row h-100 justify-content-center align-items-center mx-auto ">
-    <form name="myForm" [formGroup]="infoPosts" (ngSubmit)="onSubmit()" class="w-100 px-5">
-      <div class="row reg-form form-group mt-4 d-flex">
-        <div class="col-3 col-md-2 col-xxl-1">
-          <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936061/CodingClub/javascript_bombvn.png" class="p-0" width="40">
+<div class="container-fluid mt-3" *ngIf="isLogins">
+  <div class="content-createPost content row w-100 h-100 justify-content-center align-items-center mx-auto ">
+    <form name="myForm" [formGroup]="infoPosts" (ngSubmit)="onSubmit()" class="w-100 px-3">
+      <div class="row reg-form form-group mt-3 d-flex">
+        <div class="col-3 col-md-2 col-xxl-1 my-auto">
+          <img src="{{this.userDetailCreatePosts?.imgAvatar}}" class="p-0" width="40" height="40" style="border-radius: 100px">
         </div>
         <div class="col-9 col-md-10 col-xxl-11 my-auto">
-          <input
+          <textarea
             class="form-control"
             type = "text"
             name="status"
             formControlName="status"
-            placeholder="Học ơi, Bạn đang nghĩ gì thế ?"
+            placeholder="{{this.userDetailCreatePosts?.firstname}} ơi, Bạn đang nghĩ gì thế ?"
             required
             id="status"
           >
+          </textarea>
         </div>
       </div>
       <div class="row">

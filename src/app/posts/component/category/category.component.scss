@@ -2,11 +2,23 @@ li{
   background-color: #EDEAFF;
 }
 @media only screen and (min-width: 1450px) {
+  .sticky{
+    margin-top: 60px !important;
+    width: 25%;
+    position: fixed;
+    z-index: 100;
+  }
   li{
     width: 60%;
   }
 }
 @media only screen and (max-width: 1450px) {
+  .sticky{
+    margin-top: 60px !important;
+    width: 20%;
+    position: fixed;
+    z-index: 100;
+  }
   li{
     width: 80%;
   }
@@ -15,4 +27,26 @@ li{
   li{
     width: 90%;
   }
+}
+@media only screen and (max-width: 768px) {
+  .category{
+    display: none;
+  }
+  .sticky{
+    display: none;
+  }
+  li{
+    width: 90%;
+  }
+}
+
+.category::-webkit-scrollbar {
+  display: none;
+}
+
+.category {
+  overflow: auto;
+  height: 75vh;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

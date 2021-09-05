@@ -1,12 +1,17 @@
 <app-navbar></app-navbar>
 <div class="row m-0 p-0">
-  <app-category class="col-md-3"></app-category>
+  <app-category class="col-md-3 p-0"></app-category>
   <div class="col-md-6 text-center justify-content-center">
-    <app-create-posts class="justify-content-center"></app-create-posts>
+    <app-create-posts class="justify-content-center" [userDetailCreatePosts] = "user"></app-create-posts>
     <router-outlet></router-outlet>
   </div>
-  <div class="col-md-3">
+  <div class="section-right col-md-3 p-0 pe-3">
     <app-trending-post></app-trending-post>
     <app-list-friend></app-list-friend>
+  </div>
+</div>
+<div class="bg-loanding d-flex justify-content-center" *ngIf="this.isLoading$ | async">
+  <div class="loading spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
   </div>
 </div>

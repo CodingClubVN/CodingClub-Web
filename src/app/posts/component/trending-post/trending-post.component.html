@@ -1,1 +1,18 @@
-<p>trending-post works!</p>
+<div class="container-fluid d-flex justify-content-end p-0 m-0 mb-3">
+  <div class="section-trending w-75 mt-3 p-3 rounded">
+    <div class="d-flex justify-content-center">
+      <i class="fa fa-star" aria-hidden="true"></i>
+      <h6 class="mx-1">Top trending</h6>
+    </div>
+    <div class="w-100 d-flex mt-3 pb-2" *ngFor="let item of listTrendingPosts" style="border-bottom: 1px solid black">
+      <div class="my-auto w-100">
+        <h6>{{item.username}}</h6>
+        <p class="mb-2" style="overflow-wrap: break-word;">{{item.status}}</p>
+        <div>
+          <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {{item.countLike}}
+          <i class="fa fa-comment-o" aria-hidden="true"></i> {{item.countComment}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

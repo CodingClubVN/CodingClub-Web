@@ -1,16 +1,16 @@
 <div class="container-fluid">
-  <div *ngFor="let itemPosts of posts;  let i = index" class="content-post mx-auto mt-3 mb-5 px-4 py-5" style="background-color: #EDEAFF; border-radius: 10px">
-    <div class="row w-100 text-start">
-      <a routerLink="/posts/new/{{itemPosts.username}}" class="col-2 col-md-2 col-lg-1">
-        <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936061/CodingClub/javascript_bombvn.png" width="50">
+  <div *ngFor="let itemPosts of posts;  let i = index" class="content-post mx-auto my-3 px-3 py-3" style="background-color: #EDEAFF; border-radius: 10px">
+    <div class="w-100 text-start d-flex justify-content-between">
+      <a routerLink="/new/{{itemPosts.username}}">
+        <img src="{{itemPosts?.avatar}}" width="50" height="50" style="border-radius: 100px">
       </a>
-      <div class="mx-3 col-7 col-md-8 col-lg-9">
-        <a routerLink="/posts/new/{{itemPosts.username}}" class="text-decoration-none text-dark">
-          <p class="fw-bold my-1">{{itemPosts.username}}</p>
+      <div class="w-100 mx-2 my-auto">
+        <a routerLink="/new/{{itemPosts.username}}" class="text-decoration-none text-dark">
+          <p class="fw-bold my-0">{{itemPosts.username}}</p>
         </a>
-        <p class="m-0">{{itemPosts.day_post}}</p>
+        <p class="m-0" style="font-size: 0.75rem;">{{itemPosts.day_post | date : 'short'}}</p>
       </div>
-      <div class="text-end col-1 col-md-2 col-lg-1">
+      <div>
         <a class=" text-dark" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="fa fa-cog" aria-hidden="true"></i>
         </a>
@@ -19,13 +19,13 @@
         </ul>
       </div>
     </div>
-    <div class="py-1" style="border-bottom: 2px solid black">
-      <p class="fw-bolder text-start">{{itemPosts.status}}</p>
+    <div class="pt-2 pb-1 border-bottom border-secondary">
+      <p class="fw-bolder text-start" style="overflow-wrap: break-word;">{{itemPosts.status}}</p>
       <div class="text-center">
         <img src="{{itemPosts.image?.Array_Img}}" style="width: 98%">
       </div>
       <div class="d-flex">
-        <div *ngFor="let like of listLike;" class="text-start mx-2 mt-3 w-auto">
+        <div *ngFor="let like of listLike;" class="text-start m-0 mt-3 w-auto">
           <div class="dropdown" *ngIf="like.post_id === itemPosts.post_id">
             <a class="text-decoration-none text-dark" href="#" role="button" id="dropdownLike" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {{like.array_username.length}}
@@ -37,26 +37,28 @@
             </ul>
           </div>
         </div>
-        <div *ngFor="let comment of listComment" class="text-start mx-1 mt-3 w-auto">
-          <div *ngIf="comment.post_id === itemPosts.post_id">
-            <a (click)="functionRenderComment()">
-              <i class="fa fa-comment-o" aria-hidden="true"></i> {{comment.array_comments.length}}
-            </a>
+        <div class="mx-3">
+          <div *ngFor="let comment of listComment" class="text-start m-0 mt-3 w-auto">
+            <div *ngIf="comment.post_id === itemPosts.post_id">
+              <a (click)="functionRenderComment()">
+                <i class="fa fa-comment-o" aria-hidden="true"></i> {{comment.array_comments.length}}
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="py-2 row text-center m-0" style="border-bottom: 2px solid black;">
+    <div class="py-1 row text-center m-0 border-bottom border-secondary">
       <div class="col-6 d-flex justify-content-center" (click)="likeEven(itemPosts.post_id)">
-        <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936061/CodingClub/like_lqtzrc.png" width="40">
+        <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936061/CodingClub/like_lqtzrc.png" width="30">
         <p class="my-auto mx-2" [class] = "this.checkLike ? 'text-primary' : 'text-dark'">Thích</p>
       </div>
       <div class="col-6 d-flex justify-content-center" (click)="functionRenderComment()">
-        <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936060/CodingClub/commnet_yxp3us.png" width="40">
+        <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936060/CodingClub/commnet_yxp3us.png" width="30">
         <p class="my-auto mx-2">Bình luận</p>
       </div>
     </div>
-    <div class="comment mt-3 text-end">
+    <div class="comment text-end">
       <div *ngFor="let comment of listComment" [class] = "this.renderComment ? '' : 'd-none'">
         <div *ngIf="comment.post_id === itemPosts.post_id">
           <div *ngFor="let itemComment of comment.array_comments">
@@ -99,10 +101,10 @@
           </div>
         </div>
       </div>
-      <form name="myForm" [formGroup]="infoComment" (ngSubmit)="sendComment(itemPosts.post_id)" class="w-100">
-        <div class="row reg-form form-group mt-4 d-flex">
+      <form name="myForm" [formGroup]="infoComment" (ngSubmit)="sendComment(itemPosts.post_id)" class="w-100" *ngIf="this.checkLogin$">
+        <div class="row reg-form form-group mt-3 d-flex">
           <div class="col-2 col-md-1 text-start">
-            <img src="http://res.cloudinary.com/hieuduy175111/image/upload/v1626936061/CodingClub/javascript_bombvn.png" style="width: 40px !important">
+            <img src="{{this.user?.imgAvatar}}" style="width: 40px !important; height: 40px; border-radius: 100px ">
           </div>
           <div class="col-10 col-md-11 my-auto">
             <input
